@@ -1,13 +1,12 @@
-/* eslint-disable import/no-unresolved */
 import { Checkbox, Tooltip } from "@nextui-org/react";
 import { IconSquareCheck } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { data, Form } from "react-router";
 import { toast } from "react-toastify";
-import { LoaderDataProps } from "~/types/HomeOptionTypes";
+import type { LoaderDataProps } from "~/types/HomeOptionTypes";
 import { authenticate } from "~/utils/authHelper.server";
 import { db } from "~/utils/db.server";
-import { Route } from "./+types/_admin.homeOptions";
+import type { Route } from "./+types/_admin.homeOptions";
 
 export async function loader({ request }: Route.LoaderArgs) {
   await authenticate(request);

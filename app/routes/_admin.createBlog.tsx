@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { Block } from "@blocknote/core";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/core/style.css";
@@ -15,7 +14,7 @@ import { EyeIcon } from "~/components/poststable/EyeIcon";
 import { authenticate } from "~/utils/authHelper.server";
 import { db } from "~/utils/db.server";
 import { createErrorResponse } from "~/utils/prismaErrorHandeling";
-import { Route } from "./+types/_admin.createBlog";
+import type { Route } from "./+types/_admin.createBlog";
 export const loader = async ({ request }: Route.LoaderArgs) => {
   const userId = await authenticate(request);
   return data(userId);
@@ -24,8 +23,6 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 export const action = async ({ request }: Route.ActionArgs) => {
   const blog = await request.formData();
   const userId = await authenticate(request);
-  console.log("🚀 ~ action ~ userId:", userId);
-  console.log("🚀 ~ action ~ blog:", blog);
   const imgUrl = blog.get("imgUrl") as string;
   const title = blog.get("title") as string;
   const slug = blog.get("slug") as string;
