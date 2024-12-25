@@ -10,6 +10,7 @@ import type { Route } from "./+types/_auth.login";
 
 export default function LogIn({ actionData }: Route.ComponentProps) {
   const notify = (text: string) => toast.error(text);
+  const notifySuccess = (text: string) => toast.success(text);
   useEffect(() => {
     if (actionData !== null && actionData !== undefined) {
       if (typeof actionData === "object") {
@@ -19,7 +20,7 @@ export default function LogIn({ actionData }: Route.ComponentProps) {
           actionData.success !== ""
         ) {
           // Handle the case where actionData has a success property
-          notify(actionData.success);
+          notifySuccess(actionData.success);
         } else if (
           "authE" in actionData &&
           typeof actionData.authE === "string" &&
