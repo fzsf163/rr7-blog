@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import "~/components/BlockNotEditor/htmlstyle.css";
 import EditorBlock from "~/components/EditorComponents/editorBlock";
 import Preview from "~/components/EditorComponents/preview";
-import { EyeIcon } from "~/components/poststable/EyeIcon";
 import { authenticate } from "~/utils/authHelper.server";
 import { db } from "~/utils/db.server";
 import { createErrorResponse } from "~/utils/prismaErrorHandeling";
