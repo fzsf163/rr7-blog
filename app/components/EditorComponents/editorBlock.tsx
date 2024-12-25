@@ -27,6 +27,7 @@ export default function EditorBlock(
   },
   handleChange: (e: { target: { name: string; value: string } }) => void,
   handleTitleChange: (e: { target: { value: string } }) => void,
+  htmlFromBlock?: string,
 ) {
   return (
     <div className="relative w-full">
@@ -159,6 +160,7 @@ export default function EditorBlock(
             blocks={blocks}
             setHTML={setHTMl}
             setBlocks={setBlocks}
+            htmlFormBlock={htmlFromBlock}
           ></Editor>
         )}
       </ClientOnly>

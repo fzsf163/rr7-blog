@@ -5,23 +5,9 @@ import { formatDistance } from "date-fns";
 import { useState } from "react";
 import { Form } from "react-router";
 import { toast } from "react-toastify";
+import { CreateBlogProps } from "~/types/BlogEditOrCreate";
 import EditorBlock from "./editorBlock";
 import Preview from "./preview";
-
-interface CreateBlogProps {
-  initialData?: {
-    title?: string;
-    slug?: string;
-    readTime?: string;
-    tags?: string;
-    synopsis?: string;
-    imgUrl?: string;
-    finalUrl?: string;
-    blocks?: Block[];
-    statusSelected?: string;
-    html?: string;
-  };
-}
 
 const BlogComponent: React.FC<CreateBlogProps> = ({
   initialData,
@@ -42,7 +28,7 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
   });
 
   const [html, setHTML] = useState<string>(initialData?.html || "");
-  const date = new Date();
+  const date = new Date().toDateString();
   const relativeDay = formatDistance(date, date);
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -142,7 +128,7 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
               objUrl,
               sendPhoto,
               finalUrl,
-              date.toDateString(),
+              date,
               timeZone,
               blocks,
               setHTML,
@@ -153,6 +139,7 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
               formData,
               handleChange,
               handleTitleChange,
+              initialData?.htmlFromBlock,
             )}
             <div>
               <div className="mb-5 grid auto-cols-max grid-flow-col gap-3">
