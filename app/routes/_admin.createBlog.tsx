@@ -24,7 +24,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
   const synopsis = blog.get("synopsis") as string;
   const statusRadio = blog.get("statusRadio") as string;
   const blockData = blog.get("blockData") as string;
-  const timeNow = new Date().toLocaleDateString("ca");
+  const timeNow = new Date().toDateString();
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   try {
