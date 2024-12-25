@@ -1,5 +1,5 @@
-import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
-import { MetaFunction, useLoaderData } from "react-router";
+import { MetaFunction } from "react-router";
+import type { Route } from "./+types/_admin.editBlog.$slug";
 
 export const meta: MetaFunction = () => [
   // your meta here
@@ -8,19 +8,20 @@ export const meta: MetaFunction = () => [
   },
 ];
 
-export const loader = async ({ request, params }: LoaderFunctionArgs) => {
-  console.log("🚀 ~ loader ~ params:", params);
-  console.log("🚀 ~ loader ~ request:", request.body);
+export const loader = async ({ request, params }: Route.LoaderArgs) => {
+  console.log("🚀 ~ loader ~ request:", request);
   return params.slug;
 };
 
-export const action = async ({ request, params }: ActionFunctionArgs) => {
-  console.log("🚀 ~ action ~ params:", params);
-  console.log("🚀 ~ action ~ request:", request);
-  return null;
+export const action = async ({ request, params }: Route.ActionArgs) => {
+  return { request, params };
 };
 
-export default function RouteComponent() {
-  const data = useLoaderData<typeof loader>();
+export default function RouteComponent({
+  loaderData,
+  actionData,
+}: Route.ComponentProps) {
+  console.log("🚀 ~ actionData:", actionData?.params, actionData?.request);
+  const data = loaderData;
   return <div>{data}</div>;
 }

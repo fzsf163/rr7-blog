@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { Tooltip } from "@nextui-org/react";
 import { IconFileX, IconUpload } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
@@ -6,7 +5,7 @@ import { Form, Link } from "react-router";
 import { toast } from "react-toastify";
 import { authenticate } from "~/utils/authHelper.server";
 import { db } from "~/utils/db.server";
-import { Route } from "./+types/_admin.aboutOptions";
+import type { Route } from "./+types/_admin.aboutOptions";
 
 export async function action({ request }: Route.ActionArgs) {
   const userId = await authenticate(request);

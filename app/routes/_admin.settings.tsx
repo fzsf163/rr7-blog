@@ -7,8 +7,7 @@ import { Form, Link } from "react-router";
 import { toast } from "react-toastify";
 import { authenticate } from "~/utils/authHelper.server";
 import { db } from "~/utils/db.server";
-// eslint-disable-next-line import/no-unresolved
-import { Route } from "./+types/_admin.settings";
+import type { Route } from "./+types/_admin.settings";
 // import "../components/submitbutton/btn.css"
 export async function loader({ request }: Route.LoaderArgs) {
   const userInfo = await db.user.findMany();

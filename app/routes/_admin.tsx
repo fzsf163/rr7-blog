@@ -1,8 +1,7 @@
-/* eslint-disable import/no-unresolved */
 import { data, Outlet } from "react-router";
 import PrimaryNav from "~/components/AdminNav/primaryNav";
 import { authenticate } from "~/utils/authHelper.server";
-import { Route } from "../+types/root";
+import type { Route } from "../+types/root";
 import "../components/submitbutton/btn.css";
 
 export const loader = async ({ request }: Route.LoaderArgs) => {

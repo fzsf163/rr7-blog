@@ -4,8 +4,7 @@ import { Form, useActionData } from "react-router";
 import { toast } from "react-toastify";
 import { authenticate } from "~/utils/authHelper.server";
 import { db } from "~/utils/db.server";
-// eslint-disable-next-line import/no-unresolved
-import { Route } from "./+types/_admin.requestOptions";
+import type { Route } from "./+types/_admin.requestOptions";
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
   await authenticate(request);
