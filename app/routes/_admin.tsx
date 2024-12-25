@@ -1,4 +1,4 @@
-import { data, Outlet } from "react-router";
+import { data, Outlet, redirect } from "react-router";
 import PrimaryNav from "~/components/AdminNav/primaryNav";
 import { authenticate } from "~/utils/authHelper.server";
 import type { Route } from "../+types/root";
@@ -6,6 +6,9 @@ import "../components/submitbutton/btn.css";
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
   const userId = await authenticate(request);
+  if (!userId) {
+    throw redirect("/");
+  }
   return data(userId);
 };
 
