@@ -4,12 +4,12 @@ import "@blocknote/core/style.css";
 import { Button, Tab, Tabs } from "@nextui-org/react";
 import { IconEyeCheck, IconFileFunction, IconPlus } from "@tabler/icons-react";
 import { formatDistance } from "date-fns";
-import { Interweave } from "interweave";
 import { useState } from "react";
 import { data, Form } from "react-router";
 import { toast } from "react-toastify";
 import "~/components/BlockNotEditor/htmlstyle.css";
 import EditorBlock from "~/components/EditorComponents/editorBlock";
+import Preview from "~/components/EditorComponents/preview";
 import { EyeIcon } from "~/components/poststable/EyeIcon";
 import { authenticate } from "~/utils/authHelper.server";
 import { db } from "~/utils/db.server";
@@ -158,26 +158,7 @@ export default function CreateBlog() {
     setImgFile(null);
     setImgUrl("");
   };
-  const Preview = (
-    <div>
-      <div>
-        <h1>{formData.title}</h1>
-      </div>
-      <div>
-        <img src={imgUrl === "" ? finalUrl : imgUrl} alt="" />
-      </div>
-      <div>
-        <p>{formData.readTime}</p>
-        <p>{formData.slug}</p>
-        <p>{formData.synopsis}</p>
-        <p>{formData.tags}</p>
-        <p className="capitalize">{relativeDay}</p>
-      </div>
-      <div className="rich-text">
-        <Interweave content={html}></Interweave>
-      </div>
-    </div>
-  );
+
   return (
     <div className="m-auto w-fit px-4 sm:w-[90%]">
       {/* edit tab */}
@@ -255,7 +236,7 @@ export default function CreateBlog() {
             </div>
           }
         >
-          {Preview}
+          {Preview({ formData, finalUrl, html, imgUrl, relativeDay })}
         </Tab>
       </Tabs>
     </div>
