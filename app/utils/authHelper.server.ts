@@ -6,7 +6,6 @@ export async function authenticate(request: Request, returnTo?: string) {
     request.headers.get("cookie"),
   );
   const user: Record<string, string> = session.get("userId");
-  console.log("🚀 ~ authenticate ~ ", user.userID);
   if (user) return user.userID;
   if (returnTo) session.set("returnTo", returnTo);
   throw redirect("/login", {
