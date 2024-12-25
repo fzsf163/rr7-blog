@@ -138,7 +138,11 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
         case "thumbnail":
           return (
             <div>
-              <img className="rounded size-16" src={posts.thumbnail} alt={posts.title} />
+              <img
+                className="size-16 rounded"
+                src={posts.thumbnail}
+                alt={posts.title}
+              />
             </div>
           );
         case "title":
@@ -184,11 +188,7 @@ export default function CustomCells({ posts }: { posts: TablePropsTypes[] }) {
             <div className="relative flex items-center gap-2">
               <Tooltip content="Details">
                 {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-                <Link
-                  to={`/blog/${posts.slug ? posts.slug : posts.id}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <Link to={`/blog/${posts.id}`} target="_blank" rel="noreferrer">
                   <span className="cursor-pointer text-lg text-default-400 active:opacity-50">
                     <EyeIcon />
                   </span>

@@ -214,15 +214,6 @@ export default function CreateBlog() {
                   <IconFileFunction></IconFileFunction>
                   Save
                 </Button>
-                <Button
-                  color="secondary"
-                  radius="sm"
-                  className="text-white"
-                  type="button"
-                >
-                  <EyeIcon className="size-12"></EyeIcon>
-                  <span>See Blog</span>
-                </Button>
               </div>
             </div>
           </Form>
