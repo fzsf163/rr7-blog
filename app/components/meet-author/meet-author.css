@@ -1,0 +1,13 @@
+
+@media (max-width:425px){
+    .parent-author{
+    background-image: url("auhtor-image/1.jpg");
+    color: white;
+    background-position: center center;
+    margin: 10px;
+    object-fit: cover;
+    /* background-blend-mode: difference; */
+    background-size: 100% 100%;
+    }
+    
+}

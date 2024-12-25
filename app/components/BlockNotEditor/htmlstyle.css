@@ -1,0 +1,20 @@
+.rich-text {
+  h1 {
+    color: black;
+    &[data-level="1"] {
+      font-size: xx-large;
+    }
+  }
+  h2 {
+    color: black;
+    &[data-level="2"] {
+      font-size: x-large;
+    }
+  }
+  h3 {
+    color: black;
+    &[data-level="3"] {
+      font-size: large;
+    }
+  }
+}

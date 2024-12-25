@@ -1,0 +1,115 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+.card {
+  width: 190px;
+  height: 190px;
+  background: rgb(103, 225, 255);
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.267);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.267);
+  font-size: 30px;
+  font-weight: 900;
+}
+:root[class~="dark"] {
+  .card {
+    background: rgb(143, 143, 142);
+  }
+}
+.card:hover {
+  border-radius: 15px;
+  cursor: pointer;
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+  /* box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705); */
+  background: rgba(103, 151, 255, 0.445);
+}
+
+.first-content {
+  height: 100%;
+  width: 100%;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  opacity: 1;
+  border-radius: 15px;
+}
+
+.card:hover .first-content {
+  height: 0px;
+  opacity: 0;
+}
+
+.second-content {
+  height: 0%;
+  width: 100%;
+  opacity: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 15px;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+  font-size: 0px;
+  -webkit-transform: rotate(90deg) scale(-1);
+  -ms-transform: rotate(90deg) scale(-1);
+  transform: rotate(90deg) scale(-1);
+}
+
+.card:hover .second-content {
+  opacity: 1;
+  height: 100%;
+  font-size: 1rem;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .card {
+    width: 140px;
+    height: 140px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .card {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (min-width: 425px) and (max-width: 767px) {
+  .card {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (min-width: 320px) and (max-width: 424px) {
+  .card {
+    width: 100px;
+    height: 100px;
+  }
+}

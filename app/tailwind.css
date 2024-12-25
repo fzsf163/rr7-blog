@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* for all */
+html,
+body {
+  scroll-behavior: smooth;
+}
+/* * {
+  min-width: 0px;
+} */
+body {
+  font-family:
+    "Inter",
+    sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue";
+}
+.font-k2D {
+  font-family: "K2D", sans-serif;
+}
+/* dark theme */
+:root[class~="dark"] {
+  background-color: rgba(0, 0, 0, 0.411);
+  color: rgb(255, 255, 255);
+  .navitem {
+    border: 0.2em solid rgba(172, 255, 47, 0.144);
+  }
+}
+
+/* light theme */
+:root[class~="light"] {
+  background-color: #ebeaee;
+  color: rgb(2, 20, 2);
+}
+
+/* navbar active */
+.navbar-top .active {
+  font-weight: 800;
+  background-color: green;
+  color: whitesmoke;
+}
+/* navbar mobile menu active */
+.navbarmenu-top .active {
+  font-weight: 800;
+  background-color: green;
+  color: whitesmoke;
+}
+
+/* navbar menu items style start */
+.navitem {
+  --c: green;
+  color: var(--c);
+  font-size: 14px;
+  border: 0.2em solid var(--c);
+  border-radius: 0.16em;
+  width: 10rem;
+  height: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+  line-height: 1px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: 500ms;
+  margin: 0.1em;
+}
+
+.navitem p span {
+  position: absolute;
+  width: 30%;
+  height: 136%;
+  background-color: var(--c);
+  transform: translateY(150%);
+  border-radius: 50%;
+  left: calc((var(--n) - 1) * 27%);
+  transition: 0.4s;
+  transition-delay: calc((var(--n) - 1) * 0.1s);
+  z-index: -1;
+}
+
+.navitem:hover {
+  color: rgb(252, 243, 243);
+}
+
+.navitem:hover span {
+  transform: translateY(0) scale(2);
+}
+
+.navitem span:nth-child(1) {
+  --n: 1;
+}
+
+.navitem span:nth-child(2) {
+  --n: 2;
+}
+
+.navitem span:nth-child(3) {
+  --n: 3;
+}
+
+.navitem span:nth-child(4) {
+  --n: 4;
+}
+/* ends ❌ */

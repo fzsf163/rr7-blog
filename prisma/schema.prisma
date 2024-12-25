@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id         String   @id @default(uuid())
+  recordDate DateTime @default(now()) @db.Timestamp(6)
+  createdAt  String?
+  updatedAt  String?
+  title      String
+  slug       String
+  content    String?
+  published  Boolean  @default(false)
+  readTime   String
+  synopsis   String
+  tags       String?
+  category   String
+  thumbnail  String
+  readCount  Int?     @default(0)
+  authorId   String
+  author     User     @relation(fields: [authorId], references: [id])
+}
+
+model User {
+  id         String  @id @default(uuid())
+  email      String? @unique
+  password   String?
+  name       String?
+  title      String?
+  image      String?
+  shortbio   String?
+  authorblog String?
+  posts      Post[]
+}
+
+model Subscribers {
+  id           String  @id @default(uuid())
+  email        String  @unique
+  recieveEmail Boolean
+}
+
+model Commenters {
+  id         String     @id @default(uuid())
+  comments   String
+  userName   String     @unique
+  commentsId String?
+  Comments   Comments[]
+}
+
+model Comments {
+  id          String     @id @default(uuid())
+  comments    String
+  reply       String
+  commenterId String
+  commentors  Commenters @relation(fields: [commenterId], references: [id])
+}
+
+model Slider {
+  id       String @id @default(uuid())
+  contents String
+}
+
+model FeaturedBlogs {
+  id       String @id @default(uuid())
+  contents String
+}
+
+model TrendingBlogs {
+  id       String @id @default(uuid())
+  contents String
+}
+
+model RequestedTopics {
+  id               String @id @default(uuid())
+  requestedTopic   String
+  requesterName    String
+  requesterContact String
+  time             String
+  readStatus       String
+}

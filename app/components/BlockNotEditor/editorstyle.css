@@ -1,0 +1,31 @@
+.bn-container[data-color-scheme="dark"] {
+  --bn-font-family: inter, sans-serif;
+  --bn-colors-editor-text: #000000;
+  --bn-colors-editor-background: #ebeaee;
+  /* --bn-colors-side-menu: rgba(15, 20, 15, 0.521); */
+}
+.bn-container[data-color-scheme="light"] {
+  --bn-font-family: inter, sans-serif;
+  --bn-colors-editor-text: #000000;
+  --bn-colors-editor-background: #ebeaee;
+  --bn-colors-side-menu: rgba(26, 29, 26, 0.521);
+}
+/* .bn-inline-content:has(> .ProseMirror-trailingBreak:only-child):before {
+  font-style: normal;
+  color: rgba(57, 63, 57, 0.486);
+} */
+.bn-container .bn-suggestion-menu-item:hover{
+  background-color: rgb(153, 153, 218);
+}
+/* .bn-container .bn-drag-handle-menu{
+  background-color: blue;
+} */
+.bn-container .block-note-content .placeholder-class::before{
+  font-style: normal;
+}
+.bn-container .bn-side-menu .bn-button:hover{
+  background-color: rgb(200, 200, 218);
+}
+/* .bn-block-content h1{
+  color: blueviolet;
+} */
