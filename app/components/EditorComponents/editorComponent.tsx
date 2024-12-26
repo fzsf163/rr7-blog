@@ -28,8 +28,9 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
   });
 
   const [html, setHTML] = useState<string>(initialData?.html || "");
-  const date = new Date().toDateString();
-  const relativeDay = formatDistance(date, date);
+  const date = initialData?.createdAt ?? new Date().toDateString();
+  const today = new Date().toDateString();
+  const relativeDay = formatDistance(date, today);
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME!;

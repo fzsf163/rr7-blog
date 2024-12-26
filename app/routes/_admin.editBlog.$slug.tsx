@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { MetaFunction } from "react-router";
+import { toast } from "react-toastify";
 import BlogComponent from "~/components/EditorComponents/editorComponent";
 import { db } from "~/utils/db.server";
 import type { Route } from "./+types/_admin.editBlog.$slug";
@@ -19,13 +21,55 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return post;
 };
 
-export const action = async ({ request }: Route.ActionArgs) => {
-  const formdata = await request.formData();
-  console.log("🚀 ~ action ~ formdata:", formdata)
-  return { request };
+export const action = async ({ request, params }: Route.ActionArgs) => {
+  const blog = await request.formData();
+  const imgUrl = blog.get("imgUrl") as string;
+  const title = blog.get("title") as string;
+  const slug = blog.get("slug") as string;
+  const category = blog.get("category") as string;
+  const readTime = blog.get("readTime") as string;
+  const tags = blog.get("tags") as string;
+  const synopsis = blog.get("synopsis") as string;
+  const statusRadio = blog.get("statusRadio") as string;
+  const blockData = blog.get("blockData") as string;
+  const timeNow = blog.get("timenow") as string;
+  try {
+    await db.post.update({
+      where: {
+        id: params.slug,
+      },
+      data: {
+        title: title ?? undefined,
+        thumbnail: imgUrl ?? undefined,
+        slug: slug ?? undefined,
+        category: category ?? undefined,
+        readTime: readTime ?? undefined,
+        synopsis: synopsis ?? undefined,
+        published: statusRadio === "publish" ? true : false,
+        tags: tags ?? undefined,
+        createdAt: undefined,
+        updatedAt: timeNow,
+        content: blockData,
+      },
+    });
+
+    return "Success";
+  } catch (error) {
+    return error;
+  }
 };
 
-export default function RouteComponent({ loaderData }: Route.ComponentProps) {
+export default function RouteComponent({
+  loaderData,
+  actionData,
+}: Route.ComponentProps) {
+  const notifySuccess = (text: string) => toast.success(text);
+
+  useEffect(() => {
+    if (actionData) {
+      notifySuccess(actionData);
+    }
+  }, [actionData]);
   return (
     <BlogComponent
       initialData={{

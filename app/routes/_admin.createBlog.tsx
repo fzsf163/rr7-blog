@@ -1,6 +1,8 @@
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/core/style.css";
+import { useEffect } from "react";
 import { data } from "react-router";
+import { toast } from "react-toastify";
 import "~/components/BlockNotEditor/htmlstyle.css";
 import BlogComponent from "~/components/EditorComponents/editorComponent";
 import { authenticate } from "~/utils/authHelper.server";
@@ -24,8 +26,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
   const synopsis = blog.get("synopsis") as string;
   const statusRadio = blog.get("statusRadio") as string;
   const blockData = blog.get("blockData") as string;
-  const timeNow = new Date().toDateString();
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const timeNow = blog.get("timenow") as string;
 
   try {
     await db.post.create({
@@ -38,8 +39,8 @@ export const action = async ({ request }: Route.ActionArgs) => {
         synopsis: synopsis,
         published: statusRadio === "publish" ? true : false,
         tags: tags,
-        createdAt: timeNow + " " + timeZone,
-        updatedAt: timeNow + " " + timeZone,
+        createdAt: timeNow,
+        updatedAt: timeNow,
         content: blockData,
         author: {
           connect: {
@@ -57,6 +58,13 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
 // dropdown box for categories
 
-export default function CreateBlog() {
+export default function CreateBlog({ actionData }: Route.ComponentProps) {
+  const notifySuccess = (text: string) => toast.success(text);
+
+  useEffect(() => {
+    if (actionData?.toString()) {
+      notifySuccess(actionData.toString());
+    }
+  }, [actionData]);
   return <BlogComponent></BlogComponent>;
 }
