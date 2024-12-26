@@ -146,6 +146,7 @@ export default function EditorBlock(
                 <Radio value="draft">Draft</Radio>
               </RadioGroup>
             </div>
+            <input type="text" hidden value={timeNow} name="timenow" readOnly />
             <p>
               Created: {timeNow} - {timeZone}
             </p>
