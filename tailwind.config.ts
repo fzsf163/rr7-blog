@@ -1,5 +1,6 @@
+import { nextui } from "@nextui-org/react";
+import twt from "@tailwindcss/typography";
 import type { Config } from "tailwindcss";
-const { nextui } = require("@nextui-org/react");
 export default {
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
@@ -15,5 +16,6 @@ export default {
         light: {},
       },
     }),
+    twt(),
   ],
 } satisfies Config;

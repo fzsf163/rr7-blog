@@ -38,7 +38,7 @@ export default function Preview({
         <p>{formData.tags}</p>
         <p className="capitalize">{relativeDay}</p>
       </div>
-      <div className="rich-text">
+      <div className="prose prose-h1:text-7xl">
         <Interweave content={html}></Interweave>
       </div>
     </div>
