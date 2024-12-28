@@ -96,6 +96,7 @@ export default function EditorBlock(
           className="col-span-5 w-full bg-transparent text-xl capitalize transition-all duration-500 ease-soft-spring focus:border-green-600"
           value={formData.title}
           onChange={handleTitleChange}
+          required
         ></input>
         <input
           type="text"
@@ -115,6 +116,7 @@ export default function EditorBlock(
           className="text-md col-span-1 w-full bg-transparent capitalize transition-all duration-500 ease-soft-spring focus:border-green-600"
           value={formData.readTime}
           onChange={handleChange}
+          required
         ></input>
         <input
           type="text"
@@ -131,6 +133,7 @@ export default function EditorBlock(
           rows={4}
           value={formData.synopsis}
           onChange={handleChange}
+          required
         ></textarea>
         <div className="text-md col-auto flex items-center justify-start gap-4 text-black/60 sm:col-span-4 [&_p]:text-gray-400">
           <div className="space-y-2">
