@@ -70,13 +70,15 @@ export default function EditorBlock(
               Clear Image
             </button>
 
-            <button
-              onClick={sendPhoto}
-              className="flex items-center justify-center gap-1 rounded-md bg-green-600 px-3 py-2 text-white"
-            >
-              <IconUpload />
-              Upload Image
-            </button>
+            {finalUrl == "" && (
+              <button
+                onClick={sendPhoto}
+                className="flex items-center justify-center gap-1 rounded-md bg-green-600 px-3 py-2 text-white"
+              >
+                <IconUpload />
+                Upload Image
+              </button>
+            )}
           </div>
         )}
       </div>
