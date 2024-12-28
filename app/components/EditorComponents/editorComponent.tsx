@@ -91,11 +91,78 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
   };
 
   const generateSlug = (title: string) => {
+    const bengaliToLatin: { [key: string]: string } = {
+      অ: "o",
+      আ: "a",
+      ই: "i",
+      ঈ: "I",
+      উ: "u",
+      ঊ: "U",
+      ঋ: "rri",
+      এ: "e",
+      ঐ: "OI",
+      ও: "O",
+      ঔ: "OU",
+      ক: "k",
+      খ: "kh",
+      গ: "g",
+      ঘ: "gh",
+      ঙ: "Ng",
+      চ: "c",
+      ছ: "ch",
+      জ: "j",
+      ঝ: "jh",
+      ঞ: "NG",
+      ট: "T",
+      ঠ: "Th",
+      ড: "D",
+      ঢ: "Dh",
+      ণ: "N",
+      ত: "t",
+      থ: "th",
+      দ: "d",
+      ধ: "dh",
+      ন: "n",
+      প: "p",
+      ফ: "ph",
+      ব: "b",
+      ভ: "bh",
+      ম: "m",
+      য: "z",
+      র: "r",
+      ল: "l",
+      শ: "sh",
+      ষ: "Sh",
+      স: "s",
+      হ: "h",
+      ড়: "R",
+      ঢ়: "Rh",
+      য়: "y",
+      ৎ: "t",
+      "ং": "ng",
+      "ঃ": ":",
+      "ঁ": "^",
+      জ়: "J",
+      "া": "a",
+      "ি": "i",
+      "ী": "I",
+      "ু": "u",
+      "ূ": "U",
+      "ৃ": "rri",
+      "ে": "e",
+      "ৈ": "OI",
+      "ো": "O",
+      "ৌ": "OU",
+      "্": "", // Handle the virama (halant) character
+    };
+
     return title
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, "")
-      .replace(/\s+/g, "-")
-      .trim();
+      .split("")
+      .map((char) => bengaliToLatin[char] || char)
+      .join("")
+      .replace(/[^\w\s-]/g, "") // Remove non-alphanumeric characters
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .trim(); // Trim leading and trailing spaces
   };
 
   const handleTitleChange = (e: { target: { value: string } }) => {
