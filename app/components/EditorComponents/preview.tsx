@@ -29,20 +29,24 @@ export default function Preview({
         fontFamily: "inter, sans-serif",
       }}
     >
-      <div>
+      <div className="my-5">
         <h1 className="text-4xl">{formData.title}</h1>
       </div>
-      <div>
-        <img src={imgUrl === "" ? finalUrl : imgUrl} alt="" />
+      <div className="my-5 h-[20rem] w-full rounded-md">
+        <img
+          src={imgUrl === "" ? finalUrl : imgUrl}
+          className="h-full w-full rounded-md object-cover"
+          alt="Banner"
+        />
       </div>
-      <div>
-        <p>{formData.readTime}</p>
-        <p>{formData.slug}</p>
-        <p>{formData.synopsis}</p>
-        <p>{formData.tags}</p>
-        <p className="capitalize">{relativeDay}</p>
+      <div className="my-5">
+        <p>Reading Time {formData.readTime}</p>
+        <p>Ref Slug {formData.slug}</p>
+        <p>Synopsis :{formData.synopsis}</p>
+        <p>Tags: {formData.tags}</p>
+        <p className="text-sm">{relativeDay}</p>
       </div>
-      <div className="prose min-w-full">
+      <div className="prose my-5 min-w-full">
         <Interweave className="" content={html}></Interweave>
       </div>
     </div>
