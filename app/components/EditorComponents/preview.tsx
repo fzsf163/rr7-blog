@@ -32,7 +32,7 @@ export default function Preview({
       <div className="my-5">
         <h1 className="text-4xl">{formData.title}</h1>
       </div>
-      <div className="my-5 h-[20rem] w-full rounded-md">
+      <div className="my-5 h-[40rem] w-full rounded-md">
         <img
           src={imgUrl === "" ? finalUrl : imgUrl}
           className="h-full w-full rounded-md object-cover"

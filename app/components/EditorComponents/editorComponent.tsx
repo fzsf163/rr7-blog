@@ -1,11 +1,18 @@
-import { Block } from "@blocknote/core";
+import { Block, BlockNoteEditor } from "@blocknote/core";
 import { Button, Tab, Tabs } from "@nextui-org/react";
-import { IconEyeCheck, IconFileFunction, IconPlus } from "@tabler/icons-react";
+import {
+  IconEyeCheck,
+  IconFileFunction,
+  IconPlus,
+  IconRestore,
+} from "@tabler/icons-react";
 import { formatDistance } from "date-fns";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Form } from "react-router";
 import { toast } from "react-toastify";
 import { CreateBlogProps } from "~/types/BlogEditOrCreate";
+import { bengaliToLatin } from "~/utils/bengalMappingObj";
+import { resetEditor } from "~/utils/proxy_reset";
 import EditorBlock from "./editorBlock";
 import Preview from "./preview";
 
@@ -28,6 +35,7 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
   });
 
   const [html, setHTML] = useState<string>(initialData?.html || "");
+  const editorRef = useRef<BlockNoteEditor>(null);
   const date = initialData?.createdAt ?? new Date().toDateString();
   const today = new Date().toDateString();
   const relativeDay = formatDistance(date, today);
@@ -91,74 +99,10 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
   };
 
   const generateSlug = (title: string) => {
-    const bengaliToLatin: { [key: string]: string } = {
-      অ: "o",
-      আ: "a",
-      ই: "i",
-      ঈ: "I",
-      উ: "u",
-      ঊ: "U",
-      ঋ: "rri",
-      এ: "e",
-      ঐ: "OI",
-      ও: "O",
-      ঔ: "OU",
-      ক: "k",
-      খ: "kh",
-      গ: "g",
-      ঘ: "gh",
-      ঙ: "Ng",
-      চ: "c",
-      ছ: "ch",
-      জ: "j",
-      ঝ: "jh",
-      ঞ: "NG",
-      ট: "T",
-      ঠ: "Th",
-      ড: "D",
-      ঢ: "Dh",
-      ণ: "N",
-      ত: "t",
-      থ: "th",
-      দ: "d",
-      ধ: "dh",
-      ন: "n",
-      প: "p",
-      ফ: "ph",
-      ব: "b",
-      ভ: "bh",
-      ম: "m",
-      য: "z",
-      র: "r",
-      ল: "l",
-      শ: "sh",
-      ষ: "Sh",
-      স: "s",
-      হ: "h",
-      ড়: "R",
-      ঢ়: "Rh",
-      য়: "y",
-      ৎ: "t",
-      "ং": "ng",
-      "ঃ": ":",
-      "ঁ": "^",
-      জ়: "J",
-      "া": "a",
-      "ি": "i",
-      "ী": "I",
-      "ু": "u",
-      "ূ": "U",
-      "ৃ": "rri",
-      "ে": "e",
-      "ৈ": "OI",
-      "ো": "O",
-      "ৌ": "OU",
-      "্": "", // Handle the virama (halant) character
-    };
-
+    const bengaliToLatinObj: { [key: string]: string } = bengaliToLatin;
     return title
       .split("")
-      .map((char) => bengaliToLatin[char] || char)
+      .map((char) => bengaliToLatinObj[char] || char)
       .join("")
       .replace(/[^\w\s-]/g, "") // Remove non-alphanumeric characters
       .replace(/\s+/g, "-") // Replace spaces with hyphens
@@ -173,7 +117,26 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
       slug: generateSlug(newTitle),
     }));
   };
-
+  const handleResetEditor = () => {
+    if (editorRef.current) {
+      resetEditor(editorRef.current);
+    }
+  };
+  const handleReset = () => {
+    setFormData({
+      title: initialData?.title || "",
+      slug: initialData?.slug || "",
+      readTime: initialData?.readTime || "",
+      tags: initialData?.tags || "",
+      synopsis: initialData?.synopsis || "",
+    });
+    setImgUrl(initialData?.imgUrl || "");
+    setFinalUrl(initialData?.finalUrl || "");
+    setImgFile(null);
+    setBlocks(initialData?.blocks || []);
+    setStatusSelected(initialData?.statusSelected || "publish");
+    handleResetEditor();
+  };
   return (
     <div className="m-auto w-fit px-4 sm:w-[90%]">
       <Tabs
@@ -208,6 +171,7 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
               formData,
               handleChange,
               handleTitleChange,
+              editorRef,
               initialData?.htmlFromBlock,
             )}
             <div>
@@ -227,6 +191,14 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
                 >
                   <IconFileFunction></IconFileFunction>
                   Save
+                </Button>
+                <Button
+                  type="reset"
+                  color="warning"
+                  className="text-white"
+                  onPress={handleReset}
+                >
+                  <IconRestore></IconRestore> Reset
                 </Button>
               </div>
             </div>

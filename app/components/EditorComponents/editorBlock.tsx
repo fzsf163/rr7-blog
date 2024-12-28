@@ -1,8 +1,9 @@
-import { Block } from "@blocknote/core";
+import { Block, BlockNoteEditor } from "@blocknote/core";
 import { Radio, RadioGroup, Spinner } from "@nextui-org/react";
 import { IconFileX, IconUpload } from "@tabler/icons-react";
 import { ClientOnly } from "remix-utils/client-only";
-import Editor from "../BlockNotEditor/editor";
+// import Editor from "../BlockNotEditor/editor";
+import EditorWithRef from "~/components/BlockNotEditor/refEditor";
 import { DropCategories } from "./dropcategories";
 
 export default function EditorBlock(
@@ -27,6 +28,7 @@ export default function EditorBlock(
   },
   handleChange: (e: { target: { name: string; value: string } }) => void,
   handleTitleChange: (e: { target: { value: string } }) => void,
+  editorRef: React.RefObject<BlockNoteEditor>,
   htmlFromBlock?: string,
 ) {
   return (
@@ -163,12 +165,19 @@ export default function EditorBlock(
       <br />
       <ClientOnly fallback={<Spinner />}>
         {() => (
-          <Editor
+          // <Editor
+          //   blocks={blocks}
+          //   setHTML={setHTMl}
+          //   setBlocks={setBlocks}
+          //   htmlFormBlock={htmlFromBlock}
+          // ></Editor>
+          <EditorWithRef
             blocks={blocks}
             setHTML={setHTMl}
             setBlocks={setBlocks}
             htmlFormBlock={htmlFromBlock}
-          ></Editor>
+            ref={editorRef}
+          />
         )}
       </ClientOnly>
       <br />
