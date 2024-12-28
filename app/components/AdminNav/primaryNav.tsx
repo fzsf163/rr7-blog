@@ -19,8 +19,13 @@ export default function PrimaryNav() {
         <Sidenav></Sidenav>
       </div>
       <h1 className="animate-appearance-in font-bold text-slate-600 dark:text-slate-200 sm:text-2xl">
-        Admin Panel +{" "}
-        <Link to={`${lastSegmentPath}/${lastSegment}`}>{lastSegment}</Link>
+        Admin +{" "}
+        <Link
+          to={`${lastSegmentPath}/${lastSegment}`}
+          className="text-foreground-700"
+        >
+          {lastSegment}
+        </Link>
       </h1>
       <div className="flex items-center justify-center gap-4">
         <ThemeToggler></ThemeToggler>
