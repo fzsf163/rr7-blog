@@ -42,7 +42,7 @@ export default function Preview({
         <p>{formData.tags}</p>
         <p className="capitalize">{relativeDay}</p>
       </div>
-      <div className="prose border-2 min-w-full border-black">
+      <div className="prose min-w-full">
         <Interweave className="" content={html}></Interweave>
       </div>
     </div>
