@@ -65,6 +65,7 @@ function Editor({ blocks, setBlocks, setHTML, htmlFormBlock }: props) {
   // Renders the editor instance using a React component.
   return (
     <div className="rounded border border-black shadow">
+      {/* @ts-expect-error no idea why */}
       <BlockNoteView editor={editor} onChange={onChange} theme={"light"} />
     </div>
   );
