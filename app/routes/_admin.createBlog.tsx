@@ -3,7 +3,6 @@ import "@blocknote/core/style.css";
 import { useEffect } from "react";
 import { data } from "react-router";
 import { toast } from "react-toastify";
-import "~/components/BlockNotEditor/htmlstyle.css";
 import BlogComponent from "~/components/EditorComponents/editorComponent";
 import { authenticate } from "~/utils/authHelper.server";
 import { db } from "~/utils/db.server";

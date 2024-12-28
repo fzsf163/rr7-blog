@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { MetaFunction } from "react-router";
 import { toast } from "react-toastify";
-import "~/components/BlockNotEditor/htmlstyle.css";
 import BlogComponent from "~/components/EditorComponents/editorComponent";
 import { db } from "~/utils/db.server";
 import type { Route } from "./+types/_admin.editBlog.$slug";

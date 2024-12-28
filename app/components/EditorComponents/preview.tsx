@@ -1,5 +1,5 @@
 import { Interweave } from "interweave";
-
+import "~/components/BlockNotEditor/htmlstyle.css";
 type PREVIEW = {
   title: string;
   slug: string;
@@ -26,7 +26,7 @@ export default function Preview({
   return (
     <div>
       <div>
-        <h1>{formData.title}</h1>
+        <h1 className="text-4xl">{formData.title}</h1>
       </div>
       <div>
         <img src={imgUrl === "" ? finalUrl : imgUrl} alt="" />
