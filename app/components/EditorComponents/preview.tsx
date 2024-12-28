@@ -1,5 +1,5 @@
 import { Interweave } from "interweave";
-import "~/components/BlockNotEditor/htmlstyle.css";
+// import "~/components/BlockNotEditor/htmlstyle.css";
 type PREVIEW = {
   title: string;
   slug: string;
@@ -24,7 +24,11 @@ export default function Preview({
   html,
 }: DATAPROPS) {
   return (
-    <div>
+    <div
+      style={{
+        fontFamily: "inter, sans-serif",
+      }}
+    >
       <div>
         <h1 className="text-4xl">{formData.title}</h1>
       </div>
@@ -38,8 +42,8 @@ export default function Preview({
         <p>{formData.tags}</p>
         <p className="capitalize">{relativeDay}</p>
       </div>
-      <div className="prose prose-h1:text-7xl">
-        <Interweave content={html}></Interweave>
+      <div className="prose border-2 min-w-full border-black">
+        <Interweave className="" content={html}></Interweave>
       </div>
     </div>
   );

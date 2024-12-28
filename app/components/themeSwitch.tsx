@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
 import {
-  Switch,
-  useSwitch,
-  VisuallyHidden,
   SwitchProps,
   Tooltip,
+  useSwitch,
+  VisuallyHidden,
 } from "@nextui-org/react";
+import React, { useEffect, useState } from "react";
 
-import { JSX } from "react/jsx-runtime";
 import { useTheme } from "next-themes";
+import { JSX } from "react/jsx-runtime";
 
 export const MoonIcon = (
   props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
@@ -49,14 +48,8 @@ export const SunIcon = (
 );
 
 const ThemeSwitch = (props: SwitchProps) => {
-  const {
-    Component,
-    slots,
-    isSelected,
-    getBaseProps,
-    getInputProps,
-    getWrapperProps,
-  } = useSwitch(props);
+  const { Component, slots, getBaseProps, getInputProps, getWrapperProps } =
+    useSwitch(props);
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -86,7 +79,7 @@ const ThemeSwitch = (props: SwitchProps) => {
           <div
             {...getWrapperProps({
               style: {
-                  // backgroundColor: theme === "light" ? "gray":"wheat",
+                // backgroundColor: theme === "light" ? "gray":"wheat",
               },
             })}
             className={slots.wrapper({

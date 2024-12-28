@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Button, Tooltip } from "@nextui-org/react";
 import { IconCaretUpFilled } from "@tabler/icons-react";
+import { useState } from "react";
 export default function ToTop() {
   const [showBtn, setShowBtn] = useState(false);
 
@@ -31,7 +31,7 @@ export default function ToTop() {
   return (
     <Tooltip className="bg-black text-white" content="Go To Top">
       <Button
-        onClick={topFunction}
+        onPress={topFunction}
         id="myBtn"
         className={
           showBtn
