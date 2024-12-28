@@ -79,6 +79,7 @@ const BlogComponent: React.FC<CreateBlogProps> = ({
   const clearImage = () => {
     setImgFile(null);
     setImgUrl("");
+    setFinalUrl("");
   };
 
   const handleChange = (e: { target: { name: string; value: string } }) => {
