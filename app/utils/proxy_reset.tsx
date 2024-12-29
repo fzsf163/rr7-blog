@@ -1,5 +1,7 @@
+import { BlockNoteEditor } from "@blocknote/core";
+
 // Define the reset function outside the component
-const resetEditor = (editor: any) => {
+const resetEditor = (editor: BlockNoteEditor) => {
   editor.removeBlocks(editor.document);
 };
 
