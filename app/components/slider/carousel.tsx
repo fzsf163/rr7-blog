@@ -72,7 +72,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   backgroundPosition: "center center",
                 }}
               >
-                <div className="flex h-full w-full flex-col items-start justify-normal gap-3 bg-gradient-to-r from-black/35 to-black/15 pl-[12%] pt-[10%] text-white sm:pl-[15%] sm:pt-[5%] md:gap-3 lg:pt-[8%] xl:gap-8">
+                <div className="flex h-full w-full flex-col items-start justify-normal gap-3 bg-gradient-to-r from-black/60 to-black/15 pl-[12%] pt-[10%] text-white sm:pl-[15%] sm:pt-[5%] md:gap-3 lg:pt-[8%] xl:gap-8">
                   <h1
                     className="text-xs text-gray-200 md:text-lg xl:text-3xl"
                     style={{ fontFamily: "K2D", fontWeight: "700" }}
@@ -82,11 +82,15 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   <h2 className="rounded-sm text-sm md:max-w-[100dvw] md:text-[1.4rem] md:leading-[35px] lg:max-w-[100dvw] lg:text-[2rem] xl:text-[3rem] xl:leading-[51px]">
                     {slide.header}
                   </h2>
-                  <p className="line-clamp-3 max-w-[70dvw] text-xs text-white/80 sm:max-w-[50dvw] md:line-clamp-4 md:text-sm lg:max-w-[40dvw] lg:text-lg">
+                  <p className="line-clamp-3 max-w-[70dvw] text-xs text-white sm:max-w-[50dvw] md:line-clamp-4 md:text-sm lg:max-w-[40dvw] lg:text-lg">
                     {slide.description}
                   </p>
 
-                  <Link to={`blog/${slide.id}`}>
+                  <Link
+                    to={`blog/${slide.id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <button className="mt-2 flex w-40 items-center justify-center gap-1 rounded-lg border border-default-300 bg-background text-xs capitalize text-foreground-700 lg:h-[50px] xl:h-[80px] xl:w-[200px] xl:gap-3 xl:text-xl">
                       read more
                       <span>

@@ -29,9 +29,7 @@ export const Thumb: React.FC<PropType> = (props) => {
           cursor: "pointer", // Add pointer cursor
         }}
         className={`size-[4rem] rounded-lg transition-all duration-300 ease-in-out xl:size-[7rem] ${
-          selected
-            ? "scale-110 opacity-100 outline outline-4 outline-white"
-            : "opacity-80"
+          selected ? "scale-110 rounded-lg opacity-100" : "opacity-80 scale-95"
         }`}
         onClick={onClick}
         onKeyDown={(e) => {
