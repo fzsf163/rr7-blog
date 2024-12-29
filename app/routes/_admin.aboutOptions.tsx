@@ -12,7 +12,6 @@ export async function action({ request }: Route.ActionArgs) {
   const formdata = await request.formData();
   const name = formdata.get("userName");
   const title = formdata.get("userTitle");
-  const description = formdata.get("userDescription");
   const pagewords = formdata.get("userAboutpagewords");
   const imgurl = formdata.get("imgUrl");
   try {
@@ -23,7 +22,6 @@ export async function action({ request }: Route.ActionArgs) {
       data: {
         image: (imgurl as string) || undefined,
         authorblog: (pagewords as string) || undefined,
-        shortbio: (description as string) || undefined,
         name: (name as string) || undefined,
         title: (title as string) || undefined,
       },
@@ -34,8 +32,6 @@ export async function action({ request }: Route.ActionArgs) {
   } catch (error) {
     return error;
   }
-
-  return null;
 }
 
 export default function AboutOptions({ actionData }: Route.ComponentProps) {
@@ -70,8 +66,6 @@ export default function AboutOptions({ actionData }: Route.ComponentProps) {
           })
           .then((data) => {
             setFinalUrl(data.url);
-            setImgUrl("");
-            console.log(data.url);
           }),
         {
           pending: "Uploading Image",
@@ -88,12 +82,14 @@ export default function AboutOptions({ actionData }: Route.ComponentProps) {
   const clearImage = () => {
     setImgFile(null);
     setImgUrl("");
+    setFinalUrl("");
   };
   useEffect(() => {
     if (actionData === undefined) return;
     if (actionData) {
       formref.current?.reset();
       setFinalUrl("");
+      setImgUrl("");
       toast.success("Data Updated");
     }
   }, [actionData]);
@@ -148,14 +144,16 @@ export default function AboutOptions({ actionData }: Route.ComponentProps) {
               <IconFileX></IconFileX>
               Clear Image
             </button>
-
-            <button
-              onClick={sendPhoto}
-              className="flex items-center justify-center gap-1 rounded-md bg-green-600 px-3 py-2 text-white"
-            >
-              <IconUpload />
-              Upload Image
-            </button>
+            {finalUrl == "" && (
+              <button
+                onClick={sendPhoto}
+                className="flex items-center justify-center gap-1 rounded-md bg-green-600 px-3 py-2 text-white"
+                type="button"
+              >
+                <IconUpload />
+                Upload Image
+              </button>
+            )}
           </div>
         )}
       </div>
@@ -173,7 +171,7 @@ export default function AboutOptions({ actionData }: Route.ComponentProps) {
             Your Name
           </label>
           <input
-            className="w-full rounded bg-neutral-300 px-3 py-5 text-xl font-semibold text-white placeholder:text-gray-400"
+            className="w-full rounded bg-neutral-300 px-3 py-5 text-xl font-semibold text-black placeholder:text-gray-400"
             placeholder="write a name..."
             type="text"
             name="userName"
@@ -185,25 +183,25 @@ export default function AboutOptions({ actionData }: Route.ComponentProps) {
             Your Title
           </label>
           <input
-            className="w-full rounded bg-neutral-300 px-3 py-5 text-xl font-semibold text-white placeholder:text-gray-400"
+            className="w-full rounded bg-neutral-300 px-3 py-5 text-xl font-semibold text-black placeholder:text-gray-400"
             placeholder="write a title..."
             type="text"
             name="userTitle"
             id="userTitle"
           />
         </div>
-        <div className="flex flex-col items-start gap-2">
+        {/* <div className="flex flex-col items-start gap-2">
           <label className="font-bold text-gray-500" htmlFor="userDescription">
             Little Description
           </label>
           <textarea
-            className="w-full rounded bg-neutral-300 px-3 py-5 text-xl font-semibold text-white placeholder:text-gray-400"
+            className="w-full rounded bg-neutral-300 px-3 py-5 text-xl font-semibold text-black placeholder:text-gray-400"
             placeholder="write a little description..."
             name="userDescription"
             id="userDescription"
             rows={4}
           />
-        </div>
+        </div> */}
         <div className="flex flex-col items-start gap-2">
           <label
             className="font-bold text-gray-500"
@@ -212,7 +210,7 @@ export default function AboutOptions({ actionData }: Route.ComponentProps) {
             Everyhting For About Page
           </label>
           <textarea
-            className="w-full rounded bg-neutral-300 px-3 py-5 text-xl font-semibold text-white placeholder:text-gray-400"
+            className="w-full rounded bg-neutral-300 px-3 py-5 text-xl font-semibold text-black placeholder:text-gray-400"
             placeholder="write a a big description..."
             name="userAboutpagewords"
             id="userAboutpagewords"
