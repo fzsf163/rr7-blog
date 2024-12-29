@@ -1,25 +1,20 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { EmblaOptionsType } from "embla-carousel";
-import useEmblaCarousel from "embla-carousel-react";
-import Fade from "embla-carousel-fade";
-import { Thumb } from "./EmblaCarouselThumbsButton";
-import Autoplay from "embla-carousel-autoplay";
-import "./carousel.css";
-import { Button, Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/react";
 import {
   IconArrowBadgeLeftFilled,
   IconArrowBadgeRightFilled,
   IconExternalLink,
 } from "@tabler/icons-react";
-import { Link, useNavigate } from "react-router";
+import { EmblaOptionsType } from "embla-carousel";
+import Fade from "embla-carousel-fade";
+import useEmblaCarousel from "embla-carousel-react";
+import React, { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router";
+import { SliderProps } from "~/types/sliderImageTypes";
+import "./carousel.css";
+import { Thumb } from "./EmblaCarouselThumbsButton";
 
 type PropType = {
-  slides: {
-    img: string;
-    header: string;
-    mainTag: string;
-    description: string;
-  }[];
+  slides: SliderProps[];
   options?: EmblaOptionsType;
 };
 
@@ -62,8 +57,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   }, [emblaMainApi, onSelect]);
 
   return (
-    <div className="embla relative">
-      <div className="embla__viewport rounded-xl" ref={emblaMainRef}>
+    <div className="embla relative rounded-md bg-transparent shadow-xl">
+      <div className="embla__viewport rounded-md" ref={emblaMainRef}>
         <div className="embla__container h-[30dvh] md:h-[40dvh] lg:h-[60dvh] xl:h-[70dvh]">
           {slides.map((slide, index) => (
             <div className="embla__slide group" key={index}>
@@ -71,9 +66,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 className="embla__slide__number"
                 style={{
                   backgroundImage: `url("${slide.img}")`,
-                  objectFit: "contain",
+                  objectFit: "cover",
                   backgroundRepeat: "no-repeat",
-                  backgroundSize: "100% 100%",
+                  backgroundSize: "100%",
                   backgroundPosition: "center center",
                 }}
               >
@@ -91,7 +86,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     {slide.description}
                   </p>
 
-                  <Link to={`blogs/${index}`}>
+                  <Link to={`blog/${slide.id}`}>
                     <button className="mt-2 flex w-40 items-center justify-center gap-1 rounded-lg bg-white text-xs capitalize text-black lg:h-[50px] xl:h-[80px] xl:w-[200px] xl:gap-3 xl:text-xl">
                       read more
                       <span>
