@@ -1,12 +1,12 @@
 import { IconAsterisk } from "@tabler/icons-react";
 import { useEffect, useRef } from "react";
-import type { ActionFunctionArgs } from "react-router";
-import { Form, useActionData } from "react-router";
+import { Form } from "react-router";
 import { toast } from "react-toastify";
 import RequestForm from "~/components/request-inputs/request-form";
 import { db } from "~/utils/db.server";
+import type { Route } from "./+types/request";
 
-export const action = async ({ request }: ActionFunctionArgs) => {
+export const action = async ({ request }: Route.ActionArgs) => {
   const formdata = await request.formData();
   const name = formdata.get("name");
   const email = formdata.get("email");
@@ -42,10 +42,8 @@ type actiondataProps = {
   success: string;
   error: unknown;
 };
-export default function RouteComponent() {
-  const actionData = useActionData<typeof action>();
+export default function RouteComponent({ actionData }: Route.ComponentProps) {
   const formRef = useRef<HTMLFormElement>(null);
-
   useEffect(() => {
     const data = actionData as unknown as actiondataProps;
     if (actionData === undefined) return;
