@@ -2,7 +2,15 @@ import { IconArrowRight } from "@tabler/icons-react";
 
 import { Link } from "react-router";
 import "./meet-author.css";
-export default function MeetAuthor() {
+interface Author {
+  id: string | null | undefined;
+  image: string | null | undefined;
+  name: string | null | undefined;
+  shortbio: string | null | undefined;
+  title: string | null | undefined;
+}
+export default function MeetAuthor(author: { author: Author }) {
+  console.log("🚀 ~ MeetAuthor ~ author:", author)
   return (
     <div className="parent-author m-auto flex items-center justify-center gap-2 rounded-lg bg-slate-500/30 sm:p-4 xl:w-[60%]">
       <div className="m-auto flex h-full w-fit flex-col items-start justify-center gap-10 rounded-lg bg-black/50 p-4 sm:p-10 md:bg-transparent lg:w-[700px]">
@@ -30,11 +38,11 @@ export default function MeetAuthor() {
 
         <div className="">
           <Link to={"about"}>
-            <button className="group h-[3rem] w-[15rem] rounded-lg bg-white/80 text-xl font-bold capitalize text-black lg:h-[5rem] hover:bg-blue-100 transition-colors duration-400 ease-in-out">
+            <button className="group h-[3rem] w-[15rem] rounded-lg bg-white/80 text-xl font-bold capitalize text-black transition-colors duration-400 ease-in-out hover:bg-blue-100 lg:h-[5rem]">
               <p className="flex items-center justify-center gap-2">
                 meet author{" "}
                 <span>
-                  <IconArrowRight className="w-0 group-hover:w-10 transition-width duration-300 ease-soft-spring"></IconArrowRight>
+                  <IconArrowRight className="w-0 duration-300 ease-soft-spring transition-width group-hover:w-10"></IconArrowRight>
                 </span>
               </p>
             </button>
@@ -46,7 +54,7 @@ export default function MeetAuthor() {
           <img
             src="auhtor-image/1.jpg"
             className="rounded-lg transition-transform duration-500 ease-soft-spring group-hover:scale-110"
-            alt="author image"
+            alt="author"
           />
         </div>
       </div>

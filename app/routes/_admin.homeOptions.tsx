@@ -45,6 +45,7 @@ export async function action({ request }: Route.ActionArgs) {
   const authorID = await authenticate(request);
   const idForSlider = await db.slider.findFirst();
   const idForFeaturedBlogs = await db.featuredBlogs.findFirst();
+  const idForTrendingBlogs = await db.featuredBlogs.findFirst();
   let hasUpdated = false;
   try {
     if (carousel.length > 0) {
@@ -73,18 +74,18 @@ export async function action({ request }: Route.ActionArgs) {
       hasUpdated = true;
     }
 
-    // if (trendingblog.length > 0) {
-    //   await db.trendingBlogs.upsert({
-    //     where: { id: 1 }, // Assuming you have a unique identifier for the trending blogs
-    //     update: {
-    //       contents: trendingblog.toString() ?? undefined,
-    //     },
-    //     create: {
-    //       contents: trendingblog.toString() ?? undefined,
-    //     },
-    //   });
-    // hasUpdated = true;
-    // }
+    if (trendingblog.length > 0) {
+      await db.trendingBlogs.upsert({
+        where: { id: idForTrendingBlogs?.id }, // Assuming you have a unique identifier for the trending blogs
+        update: {
+          contents: trendingblog.toString() ?? undefined,
+        },
+        create: {
+          contents: trendingblog.toString() ?? undefined,
+        },
+      });
+      hasUpdated = true;
+    }
 
     if (authorShortDescription) {
       await db.user.update({

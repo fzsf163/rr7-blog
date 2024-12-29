@@ -26,6 +26,15 @@ export const meta: MetaFunction = () => {
 
 export async function loader() {
   try {
+    const author = await db.user.findFirst({
+      select: {
+        id: true,
+        image: true,
+        name: true,
+        shortbio: true,
+        title: true,
+      },
+    });
     const posts = await db.post.findMany({
       include: {
         author: {
@@ -41,7 +50,7 @@ export async function loader() {
     return {
       status: 200,
       statusText: "Success",
-      data: posts,
+      data: { posts, author },
     };
   } catch (error) {
     const e = ErrorHandler.handleError(error);
@@ -96,10 +105,12 @@ export default function Index({
   const post: Post = {
     status: loaderData.status,
     statusText: "Success",
-    data: loaderData.data as PostData[],
+    data: loaderData.data?.posts as PostData[],
   };
   const sliderImages = convertPostDataToSliderPropsArray(post);
   const featArticle = convertPostDataToFeaturedArticleArray(post);
+  const author = loaderData.data?.author;
+  console.log("🚀 ~ author:", author);
   useEffect(() => {
     if (actionData === undefined) return;
     if (subsUpdate?.success) {
@@ -124,7 +135,7 @@ export default function Index({
       <Social></Social>
       <MotivationalText></MotivationalText>
       <FeaturedArticle feat_art={featArticle}></FeaturedArticle>
-      <MeetAuthor></MeetAuthor>
+      <MeetAuthor author={author!}></MeetAuthor>
       <TrendingPost></TrendingPost>
       <Categories></Categories>
       <SubscribeBox></SubscribeBox>
