@@ -32,7 +32,6 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
 export default function SingleBlog({ loaderData }: Route.ComponentProps) {
   const post = loaderData as BlogViewType;
-  console.log("🚀 ~ SingleBlog ~ post:", post.content)
   return (
     <div className="mx-auto w-[80%]">
       <Suspense fallback={<Spinner />}>
