@@ -110,7 +110,6 @@ export default function Index({
   const sliderImages = convertPostDataToSliderPropsArray(post);
   const featArticle = convertPostDataToFeaturedArticleArray(post);
   const author = loaderData.data?.author;
-  console.log("🚀 ~ author:", author);
   useEffect(() => {
     if (actionData === undefined) return;
     if (subsUpdate?.success) {
