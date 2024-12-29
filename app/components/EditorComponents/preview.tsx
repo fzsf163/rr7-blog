@@ -23,6 +23,11 @@ export default function Preview({
   relativeDay,
   html,
 }: DATAPROPS) {
+  function transform(node: HTMLElement): React.ReactNode {
+    if (node.innerHTML === "&nbsp;") {
+      return null;
+    }
+  }
   return (
     <div
       style={{
@@ -47,7 +52,11 @@ export default function Preview({
         <p className="text-sm">{relativeDay}</p>
       </div>
       <div className="prose my-5 min-w-full">
-        <Interweave className="" content={html}></Interweave>
+        <Interweave
+          transform={transform}
+          className=""
+          content={html}
+        ></Interweave>
       </div>
     </div>
   );
