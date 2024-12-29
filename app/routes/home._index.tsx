@@ -1,6 +1,7 @@
+import { Spinner } from "@nextui-org/react";
 import { EmblaOptionsType } from "embla-carousel";
-import { useEffect } from "react";
-import type { MetaFunction } from "react-router";
+import { Suspense, useEffect } from "react";
+import { Await, type MetaFunction } from "react-router";
 import { toast } from "react-toastify";
 import Categories from "~/components/catagories/categories";
 import FeaturedArticle from "~/components/feature-article/feature-article";
@@ -108,10 +109,14 @@ export default function Index({
   }, [actionData, subsUpdate]);
   return (
     <div className="max-w-screen-3xl m-auto my-5 space-y-8">
-      <EmblaCarousel
-        slides={sliderImages.images ?? []}
-        options={OPTIONS}
-      ></EmblaCarousel>
+      <Suspense fallback={<Spinner />}>
+        <Await resolve={loaderData.data}>
+          <EmblaCarousel
+            slides={sliderImages.images ?? []}
+            options={OPTIONS}
+          ></EmblaCarousel>
+        </Await>
+      </Suspense>
       <Social></Social>
       <MotivationalText></MotivationalText>
       <FeaturedArticle></FeaturedArticle>
