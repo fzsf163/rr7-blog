@@ -112,11 +112,13 @@ export default function Index({
   return (
     <div className="max-w-screen-3xl m-auto my-5 space-y-8">
       <Suspense fallback={<Spinner />}>
-        <Await resolve={loaderData.data}>
-          <EmblaCarousel
-            slides={sliderImages.images ?? []}
-            options={OPTIONS}
-          ></EmblaCarousel>
+        <Await resolve={post}>
+          {() => (
+            <EmblaCarousel
+              slides={sliderImages.images ?? []}
+              options={OPTIONS}
+            ></EmblaCarousel>
+          )}
         </Await>
       </Suspense>
       <Social></Social>
