@@ -87,7 +87,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   </p>
 
                   <Link to={`blog/${slide.id}`}>
-                    <button className="mt-2 flex w-40 items-center justify-center gap-1 rounded-lg bg-white text-xs capitalize text-black lg:h-[50px] xl:h-[80px] xl:w-[200px] xl:gap-3 xl:text-xl">
+                    <button className="mt-2 flex w-40 items-center justify-center gap-1 rounded-lg border border-default-300 bg-background text-xs capitalize text-foreground-700 lg:h-[50px] xl:h-[80px] xl:w-[200px] xl:gap-3 xl:text-xl">
                       read more
                       <span>
                         <IconExternalLink className="mb-1"></IconExternalLink>
@@ -103,22 +103,22 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <div className="btns-carousel absolute bottom-2 right-7 z-10 space-x-5 lg:right-10 lg:top-10 *:[&_button]:size-6 md:*:[&_button]:size-8 lg:*:[&_button]:size-10">
         <Tooltip content={"Go Previous"} className="bg-black text-white">
           <button
-            className="rounded-full bg-black/30 backdrop-blur-sm"
+            className="rounded-full bg-white/80 backdrop-blur-sm"
             onClick={scrollPrev}
           >
-            <IconArrowBadgeLeftFilled className="size-14 text-white" />
+            <IconArrowBadgeLeftFilled className="size-14 text-black" />
           </button>
         </Tooltip>
         <Tooltip content={"Go Next"} className="bg-black text-white">
           <button
-            className="rounded-full bg-black/30 backdrop-blur-sm"
+            className="rounded-full bg-white/80 backdrop-blur-sm"
             onClick={scrollNext}
           >
-            <IconArrowBadgeRightFilled className="size-14 text-white" />
+            <IconArrowBadgeRightFilled className="size-14 text-black" />
           </button>
         </Tooltip>
       </div>
-      <div className="embla-thumbs absolute bottom-0 right-0 z-10 hidden w-fit rounded-lg md:bottom-10 md:right-10 lg:block">
+      <div className="embla-thumbs absolute bottom-0 right-0 z-10 hidden w-fit rounded-lg bg-background/45 p-5 md:bottom-10 md:right-10 lg:block">
         <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
           <div className="embla-thumbs__container p-2">
             {slides.map((slide, index) => (
