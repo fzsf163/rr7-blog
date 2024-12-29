@@ -15,6 +15,9 @@ export default [
     route("blogs", "./routes/blogs.tsx"),
   ]),
 
+  // search route
+  route("api/search", "./routes/api.search.tsx"),
+
   route("admin", "./routes/_admin.tsx", [
     route("dashboard", "./routes/_admin.dashboard.tsx"),
     route("homeOptions", "./routes/_admin.homeOptions.tsx"),
