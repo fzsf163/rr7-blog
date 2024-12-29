@@ -25,7 +25,9 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
     });
     return post;
   } catch (error) {
-    console.log("🚀 ~ loader ~ error:", error);
+    return {
+      error: error,
+    };
   }
   return params;
 };
