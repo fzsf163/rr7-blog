@@ -12,6 +12,7 @@ import Social from "~/components/social-counter/social";
 import SubscribeBox from "~/components/subscribe/subscribe";
 import TrendingPost from "~/components/trending-posts/trending-post";
 import { Post, PostData } from "~/types/post_data_type";
+import { convertPostDataToFeaturedArticleArray } from "~/utils/converte_to_ft_art";
 import { convertPostDataToSliderPropsArray } from "~/utils/converte_to_slider_img";
 import { db } from "~/utils/db.server";
 import { ErrorHandler } from "~/utils/error_Handler";
@@ -98,6 +99,7 @@ export default function Index({
     data: loaderData.data as PostData[],
   };
   const sliderImages = convertPostDataToSliderPropsArray(post);
+  const featArticle = convertPostDataToFeaturedArticleArray(post);
   useEffect(() => {
     if (actionData === undefined) return;
     if (subsUpdate?.success) {
@@ -119,7 +121,7 @@ export default function Index({
       </Suspense>
       <Social></Social>
       <MotivationalText></MotivationalText>
-      <FeaturedArticle></FeaturedArticle>
+      <FeaturedArticle feat_art={featArticle}></FeaturedArticle>
       <MeetAuthor></MeetAuthor>
       <TrendingPost></TrendingPost>
       <Categories></Categories>
