@@ -43,47 +43,86 @@ export async function action({ request }: Route.ActionArgs) {
   const trendingblog = formdata.getAll("trendingblog");
   const authorShortDescription = formdata.get("authorShortDescription");
   const authorID = await authenticate(request);
-  const idForSlider = await db.slider.findFirst();
-  const idForFeaturedBlogs = await db.featuredBlogs.findFirst();
-  const idForTrendingBlogs = await db.featuredBlogs.findFirst();
+  const idForSlider = await db.slider.findFirst({
+    select: {
+      id: true,
+    },
+  });
+
+  const idForFeaturedBlogs = await db.featuredBlogs.findFirst({
+    select: {
+      id: true,
+    },
+  });
+
+  const idForTrendingBlogs = await db.featuredBlogs.findFirst({
+    select: {
+      id: true,
+    },
+  });
   let hasUpdated = false;
   try {
     if (carousel.length > 0) {
-      await db.slider.upsert({
-        where: { id: idForSlider?.id }, // Assuming you have a unique identifier for the slider
-        update: {
-          contents: carousel.toString() ?? undefined,
-        },
-        create: {
-          contents: carousel.toString() ?? undefined,
-        },
-      });
-      hasUpdated = true;
+      if (idForSlider) {
+        // Update the existing record
+        await db.slider.update({
+          where: {
+            id: idForSlider.id,
+          },
+          data: {
+            contents: carousel.toString(),
+          },
+        });
+      } else {
+        // Create a new record
+        await db.slider.create({
+          data: {
+            contents: carousel.toString(),
+          },
+        });
+      }
     }
-
     if (featuredarticles.length > 0) {
-      await db.featuredBlogs.upsert({
-        where: { id: idForFeaturedBlogs?.id }, // Assuming you have a unique identifier for the featured blogs
-        update: {
-          contents: featuredarticles.toString() ?? undefined,
-        },
-        create: {
-          contents: featuredarticles.toString() ?? undefined,
-        },
-      });
+      if (idForFeaturedBlogs) {
+        // Update the existing record
+        await db.featuredBlogs.update({
+          where: {
+            id: idForFeaturedBlogs.id,
+          },
+          data: {
+            contents: featuredarticles.toString(),
+          },
+        });
+      } else {
+        // Create a new record
+        await db.featuredBlogs.create({
+          data: {
+            contents: featuredarticles.toString(),
+          },
+        });
+      }
       hasUpdated = true;
     }
 
     if (trendingblog.length > 0) {
-      await db.trendingBlogs.upsert({
-        where: { id: idForTrendingBlogs?.id }, // Assuming you have a unique identifier for the trending blogs
-        update: {
-          contents: trendingblog.toString() ?? undefined,
-        },
-        create: {
-          contents: trendingblog.toString() ?? undefined,
-        },
-      });
+      if (idForTrendingBlogs) {
+        // Update the existing record
+        await db.trendingBlogs.update({
+          where: {
+            id: idForTrendingBlogs.id,
+          },
+          data: {
+            contents: trendingblog.toString(),
+          },
+        });
+      } else {
+        // Create a new record
+        await db.trendingBlogs.create({
+          data: {
+            contents: trendingblog.toString(),
+          },
+        });
+      }
       hasUpdated = true;
     }
 
