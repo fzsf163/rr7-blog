@@ -1,5 +1,4 @@
 import { Chip, Tab, Tabs } from "@nextui-org/react";
-import { Link, useSearchParams } from "react-router";
 import {
   IconArrowRight,
   IconBrain,
@@ -11,6 +10,7 @@ import {
   IconWall,
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router";
 const tabs = [
   {
     id: "all",
@@ -453,7 +453,6 @@ export default function CategoriesTabTop({
 }: {
   searchTerm: string | null;
 }) {
-  console.log("🚀 ~ searchTerm:", searchTerm);
   // must be capital , same as label
   const [searchParams, setSearchParams] = useSearchParams();
   const searchCategory = searchParams.get("category");

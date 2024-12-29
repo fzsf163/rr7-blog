@@ -4,12 +4,12 @@ import type { Route } from "./+types/api.search";
 export const loader = async ({ request }: Route.LoaderArgs) => {
   const sq = new URL(request.url);
   const q = sq.searchParams.get("blogSearch");
-  if (q !== null || q !== undefined) {
+  if (q !== null) {
     const posts = await db.post.findMany({
       where: {
         title: {
           mode: "insensitive",
-          contains: q!,
+          contains: q,
         },
       },
     });

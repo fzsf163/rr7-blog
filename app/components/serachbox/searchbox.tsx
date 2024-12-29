@@ -1,11 +1,15 @@
-import { input } from "@nextui-org/react";
-import { Link } from "react-router";
 import { IconSearch } from "@tabler/icons-react";
 import { useRef, useState } from "react";
-import cross from "../../..searchboxcross/cross.svg";
+import { FetcherWithComponents, Link } from "react-router";
+import { PostData } from "~/types/post_data_type";
 import "./searchbox.css";
 
-export default function SearchBox({ fetcher, data }: any) {
+interface SearchBoxProps {
+  fetcher: FetcherWithComponents<unknown>;
+  data: PostData[];
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function SearchBox({ fetcher, data }: SearchBoxProps) {
   const [value, setValue] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -52,9 +56,24 @@ export default function SearchBox({ fetcher, data }: any) {
           <img src="/searchboxcross/cross.svg" alt="clear search input" />
         </button>
       </div>
-      <div className="absolute left-0 top-20 z-50 h-0 w-full rounded-md bg-slate-400/80 text-[0px] text-white shadow backdrop-blur-sm transition-all duration-500 ease-in-out group-focus-within:h-full group-focus-within:w-full group-focus-within:p-3 group-focus-within:text-xl">
-        {/* {data.length === 0 && <p className="text-center font-bold">No Result Found</p>} */}
-        <Link to={`/blogs/something`}>Go to blog</Link>
+      <div className="absolute left-0 top-20 z-50  w-full rounded-md bg-slate-400/80 text-[0px] text-white shadow backdrop-blur-sm transition-all duration-500 ease-in-out group-focus-within:h-full group-focus-within:w-full group-focus-within:p-3 group-focus-within:text-xl">
+        {data?.length === 0 && (
+          <p className="text-center font-bold">No Result Found</p>
+        )}
+        {data?.length > 0 &&
+          value !== "" &&
+          data.map((p) => {
+            return (
+              <div key={p.id}>
+                <Link to={`/blog/${p.id}`}>
+                  <span>{p.title}</span>
+                  <span>
+                    <img className="w-[50%]" src={p.thumbnail} alt="" />
+                  </span>
+                </Link>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
