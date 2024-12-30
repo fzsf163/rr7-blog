@@ -1,5 +1,7 @@
 import { IconArrowRight } from "@tabler/icons-react";
 import { Link, useFetcher } from "react-router";
+import CategoriesChecks from "~/components/serachbox/catg_box";
+import SearchModal from "~/components/serachbox/search-box";
 import { db } from "~/utils/db.server";
 import { ErrorHandler } from "~/utils/error_Handler";
 import type { Route } from "./+types/blogs.$category";
@@ -84,8 +86,10 @@ export default function RouteComponent({ loaderData }: Route.ComponentProps) {
     );
   return (
     <div className="relative m-auto mt-2 max-w-screen-2xl space-y-5 capitalize">
-      <p>Filter will go here</p>
-      <p>serch will go here</p>
+      <div className="flex items-center justify-center gap-5">
+        <CategoriesChecks></CategoriesChecks>
+        <SearchModal></SearchModal>
+      </div>
       <div>fetcher Data :: {data}</div>
       <title>Blogs</title>
       {/* sapce-x-10 xl:colums-4 columns-1 gap-3 sm:columns-2 lg:columns-3 2xl:columns-4 */}
