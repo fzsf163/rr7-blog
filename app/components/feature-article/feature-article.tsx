@@ -63,7 +63,7 @@ export default function FeaturedArticle({ feat_art }: FAPROPS) {
                     </p>
                   </div>
                 </div>
-                <Link to={`blogs/${article.id}`}>
+                <Link to={`blog/${article.id}`}>
                   <button className="cursor-pointer rounded-full bg-black/30 p-2 text-xs capitalize text-white backdrop-blur-lg dark:bg-white/40 lg:px-3 lg:text-lg">
                     read more
                   </button>
