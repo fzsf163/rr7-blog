@@ -1,11 +1,11 @@
 import { Spinner } from "@nextui-org/react";
-import type { ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
 import { useFetcher, useLoaderData } from "react-router";
 import { ClientOnly } from "remix-utils/client-only";
 import CategoriesTabTop from "~/components/categories-blog-page/tabs";
 import SearchBox from "~/components/serachbox/searchbox";
+import type { Route } from "./+types/blogs";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const loader = async ({ request }: Route.LoaderArgs) => {
   const url = new URL(request.url);
   const s = url.searchParams.get("category");
   if (s) {
@@ -14,8 +14,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   return null;
 };
 
-export const action = async ({ request }: ActionFunctionArgs) => {
-  console.log("🚀 ~ action ~ request:", request);
+export const action = async () => {
   return "ok";
 };
 
