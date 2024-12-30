@@ -85,17 +85,18 @@ export default function RouteComponent({ loaderData }: Route.ComponentProps) {
       </div>
     );
   return (
-    <div className="max-w-screen-3xl relative m-auto mt-2 space-y-5 capitalize">
+    <div className="relative m-auto mt-2 max-w-screen-2xl space-y-5 capitalize">
       <div>fetcher Data :: {data}</div>
-      <div className="sapce-x-10 xl:colums-4 columns-1 gap-3 sm:columns-2 lg:columns-3 2xl:columns-4">
+      <title>Blogs</title>
+      {/* sapce-x-10 xl:colums-4 columns-1 gap-3 sm:columns-2 lg:columns-3 2xl:columns-4 */}
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10">
         {blogs.map((b) => {
           return (
             <div key={b.id}>
-              <title>{b.title}</title>
               <div>
-                <div className="group relative mb-4 flex w-fit max-w-[24rem] flex-col items-center justify-center rounded-lg text-white 2xl:w-fit">
-                  <div className="absolute left-0 top-0 z-10 flex h-fit min-w-full flex-col items-start text-wrap break-words rounded-lg rounded-b-none bg-black/30 p-4 text-sm font-semibold backdrop-blur-sm sm:text-base xl:text-xl">
-                    <span className="text-sm font-medium text-white/40 sm:text-medium">
+                <div className="group relative mb-4 flex min-h-[400px] w-fit max-w-[24rem] flex-col items-center justify-center rounded-lg text-white 2xl:w-fit">
+                  <div className="absolute left-0 top-0 z-10 flex h-fit min-w-full flex-col items-start text-wrap break-words rounded-lg rounded-b-none bg-slate-700/60 p-4 text-sm font-semibold backdrop-blur-sm sm:text-base xl:text-xl">
+                    <span className="text-sm font-medium text-foreground-300 sm:text-medium">
                       {b.category}
                     </span>
                     {b.title}
@@ -108,7 +109,7 @@ export default function RouteComponent({ loaderData }: Route.ComponentProps) {
                     ></img>
                   </div>
                   <Link to={b.id}>
-                    <button className="absolute bottom-0 left-0 z-10 flex w-full items-center justify-center gap-2 rounded-lg rounded-t-none bg-black/30 py-4 text-lg backdrop-blur-sm transition-colors duration-250 ease-in-out hover:text-blue-200">
+                    <button className="absolute bottom-0 left-0 z-10 flex w-full items-center justify-center gap-2 rounded-lg rounded-t-none bg-slate-700/60 py-4 text-lg backdrop-blur-sm transition-colors duration-250 ease-in-out hover:text-blue-200">
                       Read More{" "}
                       <span>
                         <IconArrowRight strokeWidth={2}></IconArrowRight>
