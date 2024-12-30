@@ -1,7 +1,5 @@
-import { Spinner } from "@nextui-org/react";
 import { IconArrowRight } from "@tabler/icons-react";
 import { Link, useFetcher } from "react-router";
-import { ClientOnly } from "remix-utils/client-only";
 import { db } from "~/utils/db.server";
 import { ErrorHandler } from "~/utils/error_Handler";
 import type { Route } from "./+types/blogs.$category";
@@ -86,10 +84,12 @@ export default function RouteComponent({ loaderData }: Route.ComponentProps) {
     );
   return (
     <div className="relative m-auto mt-2 max-w-screen-2xl space-y-5 capitalize">
+      <p>Filter will go here</p>
+      <p>serch will go here</p>
       <div>fetcher Data :: {data}</div>
       <title>Blogs</title>
       {/* sapce-x-10 xl:colums-4 columns-1 gap-3 sm:columns-2 lg:columns-3 2xl:columns-4 */}
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10">
+      <div className="grid min-h-screen grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10">
         {blogs.map((b) => {
           return (
             <div key={b.id}>
@@ -108,7 +108,7 @@ export default function RouteComponent({ loaderData }: Route.ComponentProps) {
                       alt=""
                     ></img>
                   </div>
-                  <Link to={b.id}>
+                  <Link to={`/blog/${b.id}`}>
                     <button className="absolute bottom-0 left-0 z-10 flex w-full items-center justify-center gap-2 rounded-lg rounded-t-none bg-slate-700/60 py-4 text-lg backdrop-blur-sm transition-colors duration-250 ease-in-out hover:text-blue-200">
                       Read More{" "}
                       <span>
@@ -122,21 +122,6 @@ export default function RouteComponent({ loaderData }: Route.ComponentProps) {
           );
         })}
       </div>
-      <ClientOnly
-        fallback={
-          <Spinner
-            label="Loading...reload page if nothing happens"
-            color="warning"
-            size="lg"
-            className="flex items-center justify-center"
-            classNames={{
-              label: "font-bold",
-            }}
-          />
-        }
-      >
-        {() => <div>BLOGS</div>}
-      </ClientOnly>
     </div>
   );
 }
