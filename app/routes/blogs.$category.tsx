@@ -86,14 +86,14 @@ export default function RouteComponent({ loaderData }: Route.ComponentProps) {
     );
   return (
     <div className="relative m-auto mt-2 max-w-screen-2xl space-y-5 capitalize">
-      <div className="flex items-center justify-center gap-5">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
         <CategoriesChecks></CategoriesChecks>
         <SearchModal></SearchModal>
       </div>
       <div>fetcher Data :: {data}</div>
       <title>Blogs</title>
       {/* sapce-x-10 xl:colums-4 columns-1 gap-3 sm:columns-2 lg:columns-3 2xl:columns-4 */}
-      <div className="grid min-h-screen grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10">
+      <div className="grid min-h-screen grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10 px-5">
         {blogs.map((b) => {
           return (
             <div key={b.id}>

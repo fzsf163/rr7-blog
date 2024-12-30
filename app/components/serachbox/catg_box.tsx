@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxGroup } from "@nextui-org/react";
+import { Button, Checkbox, CheckboxGroup } from "@nextui-org/react";
 import { useState } from "react";
 
 const categories = [
@@ -12,20 +12,24 @@ const categories = [
 export default function CategoriesChecks() {
   const [selected, setSelected] = useState<string[]>([]);
   return (
-    <CheckboxGroup
-      label="Select Categories (Select to filter)"
-      orientation="horizontal"
-      value={selected}
-      onValueChange={setSelected}
-      className="rounded border border-slate-400 p-3 shadow"
-    >
-      {categories.map((c) => {
-        return (
-          <Checkbox key={c.label} value={c.label}>
-            {c.label}
-          </Checkbox>
-        );
-      })}
-    </CheckboxGroup>
+    <div className="rounded border border-slate-400 p-3 shadow space-y-2">
+      <CheckboxGroup
+        label="Select Categories (Select to filter)"
+        orientation={"horizontal"}
+        value={selected}
+        onValueChange={setSelected}
+      >
+        {categories.map((c) => {
+          return (
+            <Checkbox key={c.label} value={c.label}>
+              {c.label}
+            </Checkbox>
+          );
+        })}
+      </CheckboxGroup>
+      <Button type="button" color="primary" radius="sm">
+        Filter
+      </Button>
+    </div>
   );
 }

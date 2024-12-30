@@ -75,7 +75,7 @@ export default function SearchModal() {
                   Close
                 </Button>
                 <Button
-                  className="bg-[#6f4ef2] text-foreground-300 shadow-lg shadow-indigo-500/20"
+                  className="bg-[#6f4ef2] text-foreground-100 shadow-lg shadow-indigo-500/20"
                   onPress={onClose}
                   type="button"
                 >
