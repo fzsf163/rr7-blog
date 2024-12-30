@@ -29,7 +29,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 };
 
 export default function SingleBlog({ loaderData }: Route.ComponentProps) {
-  const post = loaderData as BlogViewType;
+  const post = loaderData as unknown as BlogViewType;
   return (
     <div className="mx-auto w-[80%]">
       <ClientOnly>{() => <BlogView post={post}></BlogView>}</ClientOnly>
