@@ -1,12 +1,12 @@
 import {
-    Button,
-    Input,
-    Modal,
-    ModalBody,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    useDisclosure,
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
 } from "@nextui-org/react";
 import { IconSearch } from "@tabler/icons-react";
 
@@ -15,7 +15,7 @@ export default function SearchModal() {
 
   return (
     <>
-      <Button color="secondary" onPress={onOpen} isIconOnly radius="full">
+      <Button color="default" onPress={onOpen} isIconOnly radius="full">
         <IconSearch stroke={2} />
       </Button>
       <Modal
