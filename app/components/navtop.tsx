@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
-import "./navtop.css";
-import { NavLink } from "react-router";
 import { IconApiApp } from "@tabler/icons-react";
+import { useRef, useState } from "react";
+import { NavLink } from "react-router";
+import "./navtop.css";
 import ThemeToggler from "./themeSwitch";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -9,7 +9,7 @@ import NavItems from "./mainNav";
 
 const links = [
   { name: "Home", to: "/", id: 1 },
-  { name: "Blogs", to: "blogs", id: 2 },
+  { name: "Blogs", to: "blogcollection", id: 2 },
   { name: "About", to: "about", id: 3 },
   { name: "Request", to: "request", id: 4 },
 ];

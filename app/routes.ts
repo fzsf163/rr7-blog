@@ -10,9 +10,9 @@ export default [
     index("./routes/home._index.tsx"),
     route("about", "./routes/about.tsx"),
     route("request", "./routes/request.tsx"),
-    route("blogs/:slug", "./routes/blogs_.$slug.tsx"),
     route("blog/:slug", "./routes/blog.$slug.tsx"),
     route("blogs", "./routes/blogs.tsx"),
+    route("blogcollection/:categories?", "./routes/blogs.$category.tsx"),
   ]),
 
   // search route

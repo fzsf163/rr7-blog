@@ -1,5 +1,5 @@
-import { Link } from "react-router";
 import { IconArrowRight } from "@tabler/icons-react";
+import { Link } from "react-router";
 import "./categories.css";
 const categories = [
   { label: "Spirituality", bgImg: "categoriesimg/spirituality.jpg" },
@@ -29,7 +29,7 @@ export default function Categories() {
               <strong className="capitalize">{c.label}</strong>
               {/* <div className="card__body">Get UI elements that help you stand out.</div> */}
               {/* how to access link state */}
-              <Link to={`blogs?category=${c.label}`}>
+              <Link to={`/blogcollection/${c.label}`}>
                 <span className="text-sm sm:text-xl md:text-2xl">
                   See Blogs <IconArrowRight></IconArrowRight>
                 </span>

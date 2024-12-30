@@ -1,12 +1,11 @@
-import { Link, useLocation, useNavigate } from "react-router";
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import {
+  IconArticleFilled,
+  IconDialpadFilled,
   IconHomeFilled,
   IconLayoutGridFilled,
-  IconDialpadFilled,
-  IconArticleFilled,
 } from "@tabler/icons-react";
+import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router";
 const navItems = [
   {
     path: "/",
@@ -14,7 +13,7 @@ const navItems = [
     icon: <IconHomeFilled></IconHomeFilled>,
   },
   {
-    path: "blogs",
+    path: "blogcollection",
     name: "Blogs",
     icon: <IconArticleFilled></IconArticleFilled>,
   },
@@ -31,8 +30,8 @@ const navItems = [
 ];
 
 export default function NavItems() {
-  let location = useLocation();
-  let patharray = location.pathname.split("/");
+  const location = useLocation();
+  const patharray = location.pathname.split("/");
 
   let pathname = "/";
 
@@ -61,8 +60,8 @@ export default function NavItems() {
   return (
     <div className="z-[100] hidden rounded-md bg-slate-700/20 p-[0.4rem] text-black backdrop-blur-md md:block">
       <nav className="relative z-[100] flex w-full justify-start gap-2 rounded-lg">
-        {navItems.map((item, index) => {
-          const isActive = item.path === pathname;
+        {navItems.map((item) => {
+          const isActive = item.path === pathname.toLowerCase();
           return (
             <Link
               key={item.path}
