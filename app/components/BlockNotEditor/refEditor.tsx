@@ -3,8 +3,7 @@ import "@blocknote/core/fonts/inter.css";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
 import { useCreateBlockNote } from "@blocknote/react";
-import { Button, Tooltip } from "@nextui-org/react";
-import { IconWashDrycleanOff } from "@tabler/icons-react";
+import { Tooltip } from "@nextui-org/react";
 import { useTheme } from "next-themes";
 import { forwardRef, memo, useEffect, useImperativeHandle } from "react";
 import "./editorstyle.css";
@@ -76,22 +75,11 @@ const EditorWithRef = forwardRef(
     return (
       <div className="relative rounded shadow">
         <BlockNoteView
-          // @ts-expect-error no idea
           editor={editor}
           onChange={onChange}
           theme={theme === "dark" ? "dark" : "light"}
         />
-        <Tooltip content="Reset Editor Content">
-          <Button
-            size="sm"
-            className="absolute right-0 top-10 rounded-full p-2"
-            isIconOnly
-            color="danger"
-            onPress={() => editor.removeBlocks(editor.document)}
-          >
-            <IconWashDrycleanOff></IconWashDrycleanOff>{" "}
-          </Button>
-        </Tooltip>
+        <Tooltip content="Reset Editor Content"></Tooltip>
       </div>
     );
   },
