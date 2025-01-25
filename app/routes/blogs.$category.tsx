@@ -8,6 +8,9 @@ import type { Route } from "./+types/blogs.$category";
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
   const category = params.categories ?? "All";
+  console.log("🚀 --------------------------------🚀")
+  console.log("🚀 ~ loader ~ category:", category)
+  console.log("🚀 --------------------------------🚀")
   try {
     if (category === "All") {
       const blogs = await db.post.findMany({
@@ -37,7 +40,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
         where: {
           category: {
             mode: "insensitive",
-            equals: category,
+            contains: category,
           },
         },
         select: {
