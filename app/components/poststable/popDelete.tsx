@@ -4,7 +4,7 @@ import {
     PopoverContent,
     PopoverTrigger,
     Tooltip,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useFetcher } from "react-router";
 import { DeleteIcon } from "./DeleteIcon";
 

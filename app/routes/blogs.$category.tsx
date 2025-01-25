@@ -1,6 +1,6 @@
 import { IconArrowRight } from "@tabler/icons-react";
-import { Link, useFetcher } from "react-router";
-import CategoriesChecks from "~/components/serachbox/catg_box";
+import { Link } from "react-router";
+import SelectGroup from "~/components/serachbox/multi_select";
 import SearchModal from "~/components/serachbox/search-box";
 import { db } from "~/utils/db.server";
 import { ErrorHandler } from "~/utils/error_Handler";
@@ -72,8 +72,6 @@ export const action = async () => {
 };
 
 export default function RouteComponent({ loaderData }: Route.ComponentProps) {
-  const fetcher = useFetcher();
-  const data = fetcher.data;
   const blogs = loaderData?.data ?? [];
   if (blogs.length <= 0)
     return (
@@ -86,14 +84,13 @@ export default function RouteComponent({ loaderData }: Route.ComponentProps) {
     );
   return (
     <div className="relative m-auto mt-2 max-w-screen-2xl space-y-5 capitalize">
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
-        <CategoriesChecks></CategoriesChecks>
+      <div className="flex flex-col items-center justify-center gap-5 sm:flex-row">
+        <SelectGroup></SelectGroup>
         <SearchModal></SearchModal>
       </div>
-      <div>fetcher Data :: {data}</div>
       <title>Blogs</title>
       {/* sapce-x-10 xl:colums-4 columns-1 gap-3 sm:columns-2 lg:columns-3 2xl:columns-4 */}
-      <div className="grid min-h-screen grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10 px-5">
+      <div className="grid min-h-screen grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10 sm:px-5">
         {blogs.map((b) => {
           return (
             <div key={b.id}>

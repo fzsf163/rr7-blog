@@ -5,7 +5,7 @@ import {
   Image,
   Button,
   Tooltip,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { IconBook2, IconCalendarEvent } from "@tabler/icons-react";
 
 const trending = [

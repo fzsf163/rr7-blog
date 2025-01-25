@@ -1,4 +1,4 @@
-import { Input } from "@nextui-org/react";
+import { Input } from "@heroui/react";
 import "./subscribe.css";
 import { IconMailFilled } from "@tabler/icons-react";
 import { Form } from "react-router";

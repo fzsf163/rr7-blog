@@ -4,7 +4,7 @@ import {
     DropdownItem,
     DropdownMenu,
     DropdownTrigger,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { useMemo, useState } from "react";
 
 export const DropCategories = () => {

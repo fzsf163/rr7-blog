@@ -1,4 +1,4 @@
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@heroui/react";
 import { IconFileX, IconUpload } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { Form, Link } from "react-router";

@@ -1,4 +1,4 @@
-import { Checkbox, Tooltip } from "@nextui-org/react";
+import { Checkbox, Tooltip } from "@heroui/react";
 import { IconSquareCheck } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { data, Form } from "react-router";

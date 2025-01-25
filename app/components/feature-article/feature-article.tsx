@@ -4,7 +4,7 @@ import {
   CardFooter,
   CardHeader,
   Spinner,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { IconDirectionSignFilled } from "@tabler/icons-react";
 import { Link } from "react-router";
 import { FeaturedArticleType } from "~/types/featured_article_type";

@@ -3,7 +3,7 @@ import {
   Tooltip,
   useSwitch,
   VisuallyHidden,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React, { useEffect, useState } from "react";
 
 import { useTheme } from "next-themes";

@@ -1,4 +1,4 @@
-import { Button, Checkbox, CheckboxGroup } from "@nextui-org/react";
+import { Button, Checkbox, CheckboxGroup } from "@heroui/react";
 import { useState } from "react";
 
 const categories = [
@@ -12,7 +12,7 @@ const categories = [
 export default function CategoriesChecks() {
   const [selected, setSelected] = useState<string[]>([]);
   return (
-    <div className="rounded border border-slate-400 p-3 shadow space-y-2">
+    <div className="space-y-2 rounded p-3 shadow-md">
       <CheckboxGroup
         label="Select Categories (Select to filter)"
         orientation={"horizontal"}

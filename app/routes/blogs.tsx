@@ -1,4 +1,4 @@
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 import { useFetcher, useLoaderData } from "react-router";
 import { ClientOnly } from "remix-utils/client-only";
 import CategoriesTabTop from "~/components/categories-blog-page/tabs";

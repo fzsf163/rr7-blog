@@ -1,4 +1,4 @@
-import { NextUIProvider } from "@nextui-org/react";
+import { HeroUIProvider } from "@heroui/react";
 import {
   isRouteErrorResponse,
   Links,
@@ -30,11 +30,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <NextUIProvider navigate={navigate}>
+        <HeroUIProvider navigate={navigate}>
           <NextThemesProvider attribute="class" defaultTheme="light">
             {children}
           </NextThemesProvider>
-        </NextUIProvider>
+        </HeroUIProvider>
         <ScrollRestoration
           getKey={(location) => {
             // default behavior

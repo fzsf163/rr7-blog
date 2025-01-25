@@ -1,4 +1,4 @@
-import { Spinner } from "@nextui-org/react";
+import { Spinner } from "@heroui/react";
 import { EmblaOptionsType } from "embla-carousel";
 import { Suspense, useEffect } from "react";
 import { Await, type MetaFunction } from "react-router";

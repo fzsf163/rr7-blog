@@ -1,4 +1,4 @@
-import { Chip, Tab, Tabs } from "@nextui-org/react";
+import { Chip, Tab, Tabs } from "@heroui/react";
 import {
   IconArrowRight,
   IconBrain,

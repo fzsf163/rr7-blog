@@ -1,4 +1,4 @@
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@heroui/react";
 import { IconLogout } from "@tabler/icons-react";
 import { Form, Link, useLocation } from "react-router";
 import ThemeToggler from "../themeSwitch";

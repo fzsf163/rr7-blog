@@ -1,5 +1,5 @@
 import { Block, BlockNoteEditor } from "@blocknote/core";
-import { Radio, RadioGroup, Spinner } from "@nextui-org/react";
+import { Radio, RadioGroup, Spinner } from "@heroui/react";
 import { IconFileX, IconUpload } from "@tabler/icons-react";
 import { ClientOnly } from "remix-utils/client-only";
 // import Editor from "../BlockNotEditor/editor";
@@ -32,7 +32,7 @@ export default function EditorBlock(
   htmlFromBlock?: string,
 ) {
   return (
-    <div className="relative w-full">
+    (<div className="relative w-full">
       <div className="h-[20rem] w-full rounded-md bg-gray-200 outline-dashed outline-1 outline-blue-400">
         <div className="relative h-full w-full">
           {imgUrl ? (
@@ -171,18 +171,18 @@ export default function EditorBlock(
           //   setBlocks={setBlocks}
           //   htmlFormBlock={htmlFromBlock}
           // ></Editor>
-          <EditorWithRef
+          (<EditorWithRef
             blocks={blocks}
             setHTML={setHTMl}
             setBlocks={setBlocks}
             htmlFormBlock={htmlFromBlock}
             ref={editorRef}
-          />
+          />)
         )}
       </ClientOnly>
       <br />
       <br />
       <br />
-    </div>
+    </div>)
   );
 }

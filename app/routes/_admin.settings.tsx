@@ -1,4 +1,4 @@
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@heroui/react";
 import { IconPlus, IconTrashFilled } from "@tabler/icons-react";
 import argon2 from "argon2";
 import { useEffect, useState } from "react";

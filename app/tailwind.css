@@ -2,6 +2,10 @@
 
 @import url("https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wdth,wght@62.5..100,100..900&display=swap");
+
+@import url("https://fonts.maateen.me/mukti/font.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,6 +18,18 @@ body {
 /* * {
   min-width: 0px;
 } */
+/* font classes */
+.mukti-bn {
+  font-family: "Mukti", sans-serif;
+}
+
+.font-k2D {
+  font-family: "K2D", sans-serif;
+}
+.bn-google {
+  font-family: "Noto Sans Bengali", serif;
+}
+/* body */
 body {
   font-family:
     "Inter",
@@ -29,9 +45,7 @@ body {
     "Open Sans",
     "Helvetica Neue";
 }
-.font-k2D {
-  font-family: "K2D", sans-serif;
-}
+
 /* dark theme */
 :root[class~="dark"] {
   background-color: rgba(0, 0, 0, 0.411);

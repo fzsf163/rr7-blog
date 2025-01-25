@@ -1,4 +1,4 @@
-import { Button, Tooltip } from "@nextui-org/react";
+import { Button, Tooltip } from "@heroui/react";
 import { IconCaretUpFilled } from "@tabler/icons-react";
 import { useState } from "react";
 export default function ToTop() {

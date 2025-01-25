@@ -3,7 +3,7 @@ import "@blocknote/core/fonts/inter.css";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
 import { useCreateBlockNote } from "@blocknote/react";
-import { Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@heroui/react";
 import { useTheme } from "next-themes";
 import { forwardRef, memo, useEffect, useImperativeHandle } from "react";
 import "./editorstyle.css";

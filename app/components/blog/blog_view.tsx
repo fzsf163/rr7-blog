@@ -23,13 +23,9 @@ export default function BlogView({ post }: BlogViewProps) {
     }
   }
   return (
-    <div
-      style={{
-        fontFamily: "inter, sans-serif",
-      }}
-    >
+    <div className="bn-google">
       <div className="my-2">
-        <h1 className="text-4xl">{title}</h1>
+        <h1 className="text-5xl">{title}</h1>
       </div>
       <div className="my-5 h-[40rem] w-full rounded-md">
         <img

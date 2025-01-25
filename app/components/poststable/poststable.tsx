@@ -8,7 +8,7 @@ import {
   TableCell,
   Pagination,
   getKeyValue,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import { users } from "./data";
 
 export default function PostTable() {

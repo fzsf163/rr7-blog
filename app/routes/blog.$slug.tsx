@@ -1,3 +1,4 @@
+import { Spinner } from "@heroui/react";
 import { ClientOnly } from "remix-utils/client-only";
 import BlogView from "~/components/blog/blog_view";
 import { BlogViewType } from "~/types/blog_view_type";
@@ -32,7 +33,15 @@ export default function SingleBlog({ loaderData }: Route.ComponentProps) {
   const post = loaderData as unknown as BlogViewType;
   return (
     <div className="mx-auto w-[80%]">
-      <ClientOnly>{() => <BlogView post={post}></BlogView>}</ClientOnly>
+      <ClientOnly
+        fallback={
+          <div className="flex h-screen items-center justify-center">
+            <Spinner size="lg" label="Loading Please wait..." />
+          </div>
+        }
+      >
+        {() => <BlogView post={post}></BlogView>}
+      </ClientOnly>
     </div>
   );
 }

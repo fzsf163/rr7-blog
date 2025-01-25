@@ -1,5 +1,5 @@
 import { Block, BlockNoteEditor } from "@blocknote/core";
-import { Button, Tab, Tabs } from "@nextui-org/react";
+import { Button, Tab, Tabs } from "@heroui/react";
 import {
   IconEyeCheck,
   IconFileFunction,

@@ -1,4 +1,4 @@
-import { Button, Tab, Tabs } from "@nextui-org/react";
+import { Button, Tab, Tabs } from "@heroui/react";
 import { useEffect } from "react";
 import { Form, useActionData } from "react-router";
 import { toast } from "react-toastify";

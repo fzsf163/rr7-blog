@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
   Tooltip,
-} from "@nextui-org/react";
+} from "@heroui/react";
 import React from "react";
 import { Link } from "react-router";
 import { EditIcon } from "./EditIcon";
