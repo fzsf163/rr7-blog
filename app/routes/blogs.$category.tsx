@@ -99,8 +99,8 @@ export default function RouteComponent({ loaderData }: Route.ComponentProps) {
       {/* sapce-x-10 xl:colums-4 columns-1 gap-3 sm:columns-2 lg:columns-3 2xl:columns-4 */}
       <div className="grid min-h-screen grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-7">
         {blogs.length <= 0 && (
-          <div className="min-h-screen pt-5 text-center text-5xl">
-            Ops No blog found In that Category!!!🥲😭😖 <br /> Go Back to{" "}
+          <div className="min-h-screen pt-5 text-center text-xl font-extralight">
+            OOPS!!! No blog found In that Category!!!🥲😭😖 <br /> Go Back to{" "}
             <span className="cursor-pointer text-blue-600">
               <Link to={"/blogcollection"}>Blogs</Link>
             </span>

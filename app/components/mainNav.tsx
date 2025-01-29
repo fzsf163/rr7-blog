@@ -72,6 +72,8 @@ export default function NavItems() {
               }`}
               data-active={isActive}
               to={item.path}
+              viewTransition
+              prefetch="intent"
               // onMouseOver={() => setHoveredPath(item.path)}
               // onMouseLeave={() => setHoveredPath(pathname)}
             >
