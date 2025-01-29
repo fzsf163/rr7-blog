@@ -1,5 +1,7 @@
 import type { Selection } from "@heroui/react";
-import { Select, SelectItem } from "@heroui/react";
+import { Button, Select, SelectItem } from "@heroui/react";
+import { IconX } from "@tabler/icons-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useSearchParams } from "react-router";
 const categories = [
   { label: "Spirituality", bgImg: "categoriesimg/spirituality.jpg" },
@@ -11,8 +13,6 @@ const categories = [
 ];
 
 export default function SelectGroup() {
-
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   // Get selected categories from URL
@@ -31,6 +31,17 @@ export default function SelectGroup() {
     }
     setSearchParams(newParams);
   };
+
+  const handleFilterClear = () => {
+    setSearchParams("");
+  };
+
+  const fadeInOutVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
   return (
     <div className="w-full">
       <Select
@@ -40,11 +51,35 @@ export default function SelectGroup() {
         selectionMode="multiple"
         onSelectionChange={handleSelectionChange}
         selectedKeys={selectedKeys}
+        description="The best place to find peace of mind"
       >
         {categories.map((c) => (
           <SelectItem key={c.label}>{c.label}</SelectItem>
         ))}
       </Select>
+      <AnimatePresence>
+        {searchParams.get("categories") !== null && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={fadeInOutVariants}
+            transition={{ duration: 0.5 }}
+          >
+            <Button
+              radius="sm"
+              variant="faded"
+              className="flex items-center justify-start gap-1"
+              type="button"
+              onPress={handleFilterClear}
+              key={"clearFilterButton"}
+            >
+              <p>Clear filter</p>
+              <IconX stroke={3}></IconX>
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
