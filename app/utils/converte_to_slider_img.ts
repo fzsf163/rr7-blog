@@ -5,7 +5,7 @@ import { SliderProps, SliderPropsArray } from "~/types/sliderImageTypes";
 export function convertPostDataToSliderPropsArray(
   post: Post,
 ): SliderPropsArray {
-  const sliderPropsArray: SliderProps[] = post.data.map((item) => ({
+  const sliderPropsArray: SliderProps[] = post.data?.map((item) => ({
     id: item.id,
     img: item.thumbnail,
     header: item.title,
@@ -15,5 +15,5 @@ export function convertPostDataToSliderPropsArray(
     authorImage: item.author.image,
   }));
 
-  return { images: sliderPropsArray };
+  return { images: sliderPropsArray ?? [] };
 }

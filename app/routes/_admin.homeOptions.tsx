@@ -1,11 +1,12 @@
-import { Checkbox, Tooltip } from "@heroui/react";
-import { IconSquareCheck } from "@tabler/icons-react";
+import { Tooltip } from "@heroui/react";
 import { useEffect, useState } from "react";
 import { data, Form } from "react-router";
 import { toast } from "react-toastify";
+import { CheckboxSection } from "~/components/HomeOptions/checkBoxComponent";
 import type { LoaderDataProps } from "~/types/HomeOptionTypes";
 import { authenticate } from "~/utils/authHelper.server";
 import { db } from "~/utils/db.server";
+import { ErrorHandler } from "~/utils/error_Handler";
 import type { Route } from "./+types/_admin.homeOptions";
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -22,10 +23,12 @@ export async function loader({ request }: Route.LoaderArgs) {
     });
     const slider = await db.slider.findMany();
     const featuredPosts = await db.featuredBlogs.findMany();
+    const trending = await db.trendingBlogs.findMany();
     const allData: LoaderDataProps = {
       slider,
       featuredPosts,
       posts,
+      trending,
     };
 
     return data(allData);
@@ -55,7 +58,7 @@ export async function action({ request }: Route.ActionArgs) {
     },
   });
 
-  const idForTrendingBlogs = await db.featuredBlogs.findFirst({
+  const idForTrendingBlogs = await db.trendingBlogs.findFirst({
     select: {
       id: true,
     },
@@ -150,7 +153,10 @@ export async function action({ request }: Route.ActionArgs) {
       });
     }
   } catch (error) {
-    console.log("🚀 ~ action ~ error:", error);
+    const herror = ErrorHandler.handleError(error);
+    console.log("🚀 --------------------------🚀");
+    console.error("🚀 ~ action ~ herror:", herror);
+    console.log("🚀 --------------------------🚀");
     return data({
       status: 500,
       statustext: "An error occurred while processing the request.",
@@ -158,147 +164,96 @@ export async function action({ request }: Route.ActionArgs) {
   }
 }
 
-// icon for checkBox
-const CheckIcon = ({ ...props }) => {
-  // avoid passing non-DOM attributes to svg
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, react/prop-types
-  const { isSelected, isIndeterminate, disableAnimation, ...otherProps } =
-    props;
-  return <IconSquareCheck stroke={3} {...otherProps}></IconSquareCheck>;
-};
-const layerModel = [
-  {
-    label: "carousel",
-    id: 1,
-    sub: "Select posts for carousel",
-  },
-  {
-    label: "featured articles",
-    id: 2,
-    sub: "Select posts for featured",
-  },
-  {
-    label: "trending blog",
-    id: 3,
-    sub: "Select posts for trending",
-  },
-];
-
 export default function HomeOptions({
   loaderData,
   actionData,
 }: Route.ComponentProps) {
-  // Initialize separate state objects for each section
-  const [carouselCheckedState, setCarouselCheckedState] = useState<
-    Record<string, boolean>
-  >({});
-  const [featuredArticlesCheckedState, setFeaturedArticlesCheckedState] =
-    useState<Record<string, boolean>>({});
-  const [trendingBlogCheckedState, setTrendingBlogCheckedState] = useState<
-    Record<string, boolean>
-  >({});
-
-  const { slider, posts, featuredPosts } =
+  const { slider, posts, featuredPosts, trending } =
     loaderData as unknown as LoaderDataProps;
-  const transformedSlider = slider.map((item) => ({
-    ...item,
-    contents: item.contents.split(","),
-  }));
 
-  const transformedFeaturedBlogs = featuredPosts.map((item) => ({
-    ...item,
-    contents: item.contents.split(","),
-  }));
-
-  // Function to determine the initial checked state
-  const getInitialCheckedState = (L: { label: string }, pId: string) => {
-    return (
-      (L.label.toLowerCase() === "carousel" &&
-        transformedSlider[0]?.contents.includes(pId)) ||
-      (L.label.toLowerCase() === "featured articles" &&
-        transformedFeaturedBlogs[0]?.contents.includes(pId)) ||
-      (L.label.toLowerCase() === "trending blog" &&
-        transformedFeaturedBlogs[0]?.contents.includes(pId))
-    );
+  // Transform data once
+  const transformedData = {
+    slider: slider.map((item) => ({
+      ...item,
+      contents: item.contents.split(","),
+    })),
+    featured: featuredPosts.map((item) => ({
+      ...item,
+      contents: item.contents.split(","),
+    })),
+    trending: trending.map((item) => ({
+      ...item,
+      contents: item.contents.split(","),
+    })),
   };
 
-  const notify = (text: string) => toast.success(text);
-  const notifyError = (text: string) => toast.error(text);
-  const notifyWarn = (text: string) => toast.warn(text);
+  // State management
+  const [carouselChecked, setCarouselChecked] = useState<
+    Record<string, boolean>
+  >({});
+  const [featuredChecked, setFeaturedChecked] = useState<
+    Record<string, boolean>
+  >({});
+  const [trendingChecked, setTrendingChecked] = useState<
+    Record<string, boolean>
+  >({});
+
+  type StatusCode = 200 | 400 | 500;
+  // Toast notifications
   useEffect(() => {
-    if (actionData?.status === 200) {
-      notify(actionData?.statustext);
-    }
-    if (actionData?.status === 400) {
-      notifyWarn(actionData?.statustext);
-    }
-    if (actionData?.status === 500) {
-      notifyError(actionData?.statustext);
+    if (!actionData) return;
+
+    const notifyMap: {
+      200: typeof toast.success;
+      400: typeof toast.warn;
+      500: typeof toast.error;
+    } = {
+      200: toast.success,
+      400: toast.warn,
+      500: toast.error,
+    };
+    if (actionData.status in notifyMap) {
+      notifyMap[actionData.status as StatusCode]?.(actionData.statustext);
+    } else {
+      console.error(`Unexpected status code: ${actionData.status}`);
     }
   }, [actionData]);
+
   return (
     <Form method="POST" encType="application/x-www-form-urlencoded">
       <div className="mx-auto w-fit space-y-10 py-5 sm:w-[70%]">
         <h1 className="text-4xl font-bold">Home Settings</h1>
         {/* serialize the order list */}
         <div className="space-y-10">
-          {layerModel.map((L) => {
-            return (
-              <div key={L.id}>
-                <p className="text-xl font-semibold capitalize">{L.label}</p>
-                <p className="my-3 font-bold text-gray-500">{L.sub}</p>
-                <div className="grid w-full gap-2 rounded bg-neutral-300 p-4 text-xl font-semibold shadow-md">
-                  {posts.map((p) => {
-                    const isChecked = getInitialCheckedState(L, p.id);
-                    // Determine the appropriate state and setter based on the label
-                    let checkedState: Record<string, boolean> = {};
-                    let setCheckedState: React.Dispatch<
-                      React.SetStateAction<Record<string, boolean>>
-                    > = () => {};
-                    if (L.label.toLowerCase() === "carousel") {
-                      checkedState = carouselCheckedState;
-                      setCheckedState = setCarouselCheckedState;
-                    } else if (L.label.toLowerCase() === "featured articles") {
-                      checkedState = featuredArticlesCheckedState;
-                      setCheckedState = setFeaturedArticlesCheckedState;
-                    } else if (L.label.toLowerCase() === "trending blog") {
-                      checkedState = trendingBlogCheckedState;
-                      setCheckedState = setTrendingBlogCheckedState;
-                    }
-                    return (
-                      <Checkbox
-                        key={p.id}
-                        classNames={{
-                          // base: "bg-green-600 m-5",
-                          label: "flex flex-col",
-                          // icon: "size-10",
-                          wrapper: "bg-neutral-300 border-2 border-blue-900",
-                        }}
-                        icon={<CheckIcon></CheckIcon>}
-                        size="lg"
-                        radius="sm"
-                        value={p.id}
-                        name={L.label.split(" ").join("").toLowerCase()}
-                        onChange={(x) => {
-                          console.log("Checked:", x.currentTarget.checked);
-                          console.log("Value:", x.currentTarget.value);
-                        }}
-                        isSelected={checkedState[p.id] ?? isChecked} // Set the checked state
-                        onValueChange={(checked) => {
-                          setCheckedState((prevState) => ({
-                            ...prevState,
-                            [p.id]: checked,
-                          }));
-                        }}
-                      >
-                        {p.title !== "" ? p.title : p.id}
-                      </Checkbox>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
+          <CheckboxSection
+            title="Carousel"
+            subtitle="Select posts for carousel"
+            name="carousel"
+            posts={posts}
+            checkedState={carouselChecked}
+            setCheckedState={setCarouselChecked}
+            selectedPosts={transformedData.slider[0]?.contents || []}
+          />
+
+          <CheckboxSection
+            title="Featured Articles"
+            subtitle="Select posts for featured"
+            name="featuredarticles"
+            posts={posts}
+            checkedState={featuredChecked}
+            setCheckedState={setFeaturedChecked}
+            selectedPosts={transformedData.featured[0]?.contents || []}
+          />
+
+          <CheckboxSection
+            title="Trending Blog"
+            subtitle="Select posts for trending"
+            name="trendingblog"
+            posts={posts}
+            checkedState={trendingChecked}
+            setCheckedState={setTrendingChecked}
+            selectedPosts={transformedData.trending[0]?.contents || []}
+          />
         </div>
         <div>
           <p className="text-xl font-semibold capitalize">author section</p>

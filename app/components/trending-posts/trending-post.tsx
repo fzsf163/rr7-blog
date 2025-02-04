@@ -1,40 +1,8 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Image,
-  Button,
-  Tooltip,
-} from "@heroui/react";
+import { Tooltip } from "@heroui/react";
 import { IconBook2, IconCalendarEvent } from "@tabler/icons-react";
+import { TrendingBlogs } from "~/types/trending_types";
 
-const trending = [
-  {
-    title: "Title of the blog yo yo oyo yo",
-    readingTime: "3 min",
-    published: "12-4-24",
-    img: "https://nextui.org/images/hero-card-complete.jpeg",
-  },
-  {
-    title: "Title of the blog yo yo oyo yo",
-    readingTime: "3 min",
-    published: "12-4-24",
-    img: "https://nextui.org/images/hero-card-complete.jpeg",
-  },
-  {
-    title: "Title of the blog yo yo oyo yo",
-    readingTime: "3 min",
-    published: "12-4-24",
-    img: "https://nextui.org/images/hero-card-complete.jpeg",
-  },
-  {
-    title: "Title of the blog yo yo oyo yo",
-    readingTime: "3 min",
-    published: "12-4-24",
-    img: "https://nextui.org/images/hero-card-complete.jpeg",
-  },
-];
-export default function TrendingPost() {
+export default function TrendingPost({ trending }: TrendingBlogs) {
   return (
     <div className="m-auto space-y-10 text-center">
       <h1 className="fa-text text-xl font-bold uppercase sm:text-2xl md:text-5xl lg:text-6xl xl:text-8xl 2xl:text-9xl">
@@ -57,6 +25,7 @@ export default function TrendingPost() {
                   <img
                     src={trend.img}
                     className="h-full w-full rounded-lg transition-transform duration-500 ease-soft-spring group-hover:scale-125"
+                    alt=""
                   ></img>
                 </div>
                 <div className="flex h-full max-w-[400px] flex-col items-start justify-between gap-1 p-5">

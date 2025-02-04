@@ -1,7 +1,6 @@
-import { Spinner } from "@heroui/react";
 import { EmblaOptionsType } from "embla-carousel";
-import { Suspense, useEffect } from "react";
-import { Await, type MetaFunction } from "react-router";
+import { useEffect } from "react";
+import { type MetaFunction } from "react-router";
 import { toast } from "react-toastify";
 import Categories from "~/components/catagories/categories";
 import FeaturedArticle from "~/components/feature-article/feature-article";
@@ -14,6 +13,7 @@ import TrendingPost from "~/components/trending-posts/trending-post";
 import { Post, PostData } from "~/types/post_data_type";
 import { convertPostDataToFeaturedArticleArray } from "~/utils/converte_to_ft_art";
 import { convertPostDataToSliderPropsArray } from "~/utils/converte_to_slider_img";
+import { convertPostDataToTrendingArray } from "~/utils/converte_to_trending";
 import { db } from "~/utils/db.server";
 import { ErrorHandler } from "~/utils/error_Handler";
 import type { Route } from "./+types/home._index";
@@ -47,6 +47,7 @@ export async function loader() {
         },
       },
     });
+
     return {
       status: 200,
       statusText: "Success",
@@ -96,6 +97,7 @@ type actionProps = {
   success: string | null | undefined;
   error: string | null | undefined;
 };
+
 export default function Index({
   actionData,
   loaderData,
@@ -110,6 +112,7 @@ export default function Index({
   const sliderImages = convertPostDataToSliderPropsArray(post);
   const featArticle = convertPostDataToFeaturedArticleArray(post);
   const author = loaderData.data?.author;
+  const trending = convertPostDataToTrendingArray(post);
   useEffect(() => {
     if (actionData === undefined) return;
     if (subsUpdate?.success) {
@@ -121,21 +124,16 @@ export default function Index({
   }, [actionData, subsUpdate]);
   return (
     <div className="max-w-screen-3xl m-auto my-5 space-y-8">
-      <Suspense fallback={<Spinner />}>
-        <Await resolve={post}>
-          {() => (
-            <EmblaCarousel
-              slides={sliderImages.images ?? []}
-              options={OPTIONS}
-            ></EmblaCarousel>
-          )}
-        </Await>
-      </Suspense>
+      <EmblaCarousel
+        slides={sliderImages.images ?? []}
+        options={OPTIONS}
+      ></EmblaCarousel>
+
       <Social></Social>
       <MotivationalText></MotivationalText>
       <FeaturedArticle feat_art={featArticle}></FeaturedArticle>
       <MeetAuthor author={author!}></MeetAuthor>
-      <TrendingPost></TrendingPost>
+      <TrendingPost trending={trending.trending}></TrendingPost>
       <Categories></Categories>
       <SubscribeBox></SubscribeBox>
     </div>
