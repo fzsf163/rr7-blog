@@ -4,6 +4,7 @@ import { BlogViewType } from "~/types/blog_view_type";
 type BlogViewProps = {
   post: BlogViewType;
 };
+
 export default function BlogView({ post }: BlogViewProps) {
   const {
     author,
@@ -22,10 +23,13 @@ export default function BlogView({ post }: BlogViewProps) {
       return null;
     }
   }
+  // TODO:
+  // ^ add fb comment plugin
   return (
-    <div className="bn-google">
+    <div className="bn-google mt-10">
       <div className="my-2">
         <h1 className="text-5xl">{title}</h1>
+        <h3 className="font-bold text-foreground-500">By {author.name}</h3>
       </div>
       <div className="my-5 h-[40rem] w-full rounded-md">
         <img
@@ -34,21 +38,17 @@ export default function BlogView({ post }: BlogViewProps) {
           alt="Banner"
         />
       </div>
-      <div className="my-2">
-        <p>Reading Time {readTime}</p>
-        <p>Category {category}</p>
-        <p>Synopsis :{synopsis}</p>
-        <p>Tags: {tags}</p>
-        <p>Reads: {readCount}</p>
-        <p className="text-sm">{updatedAt}</p>
+      <div className="m-auto my-2 space-y-2">
+        <div className="flex items-center justify-start gap-10 text-sm text-foreground-500">
+          <p>Reading Time {readTime}</p>
+          <p>Category {category}</p>
+          <p>Tags: {tags}</p>
+          <p>Reads: {readCount}</p>
+          <p>{updatedAt}</p>
+        </div>
+        <p className="italic">{synopsis}</p>
       </div>
-      <div className="my-2">
-        <p>Author:{author.name}</p>
-        <p>ShortBio :{author.shortbio}</p>
-        <p>Title: {author.title}</p>
-        <p className="text-sm">{updatedAt}</p>
-      </div>
-      <div className="prose my-2 min-w-full p-0">
+      <div className="prose prose-xl m-auto my-2 mt-5 min-w-[50dvw] p-0 text-justify">
         <Interweave noWrap transform={transform} content={content}></Interweave>
       </div>
     </div>
