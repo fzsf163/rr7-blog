@@ -1,4 +1,5 @@
 export interface Trending {
+  id: string;
   title: string;
   readingTime: string;
   published?: string;
