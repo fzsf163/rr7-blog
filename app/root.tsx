@@ -47,9 +47,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+// TODO:
+// ^ add translation option bn-en
 export default function App() {
   return (
-    <div>
+    <div className="bn-google">
       <Outlet />
       <ToTop></ToTop>
       <ToastContainer
