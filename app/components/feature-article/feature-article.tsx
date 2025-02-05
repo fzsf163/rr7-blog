@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Spinner,
-} from "@heroui/react";
+import { Card, CardBody, CardFooter, CardHeader, Spinner } from "@heroui/react";
 import { IconDirectionSignFilled } from "@tabler/icons-react";
 import { Link } from "react-router";
 import { FeaturedArticleType } from "~/types/featured_article_type";
@@ -36,10 +30,10 @@ export default function FeaturedArticle({ feat_art }: FAPROPS) {
               key={index + article.id}
             >
               <CardHeader className="absolute top-0 z-10 flex-col items-start rounded-md rounded-bl-none rounded-br-none bg-black/70 dark:border dark:border-default-100 dark:bg-black/80">
-                <p className="text-[10px] font-bold uppercase text-white sm:text-base">
+                <p className="line-clamp-3 overflow-hidden text-ellipsis text-[10px] font-bold uppercase text-white sm:text-base">
                   {article.cardtitleOne}
                 </p>
-                <h4 className="pt-2 text-left text-base font-extralight capitalize text-foreground-100 sm:text-base">
+                <h4 className="line-clamp-3 overflow-hidden text-ellipsis pt-2 text-left text-base font-extralight capitalize text-foreground-100 sm:text-base">
                   {article.cardtitleTwo}
                 </h4>
               </CardHeader>
@@ -63,7 +57,7 @@ export default function FeaturedArticle({ feat_art }: FAPROPS) {
                     </p>
                   </div>
                 </div>
-                <Link to={`blog/${article.id}`}>
+                <Link to={`blog/${article.id}`} viewTransition>
                   <button className="cursor-pointer rounded-full bg-black/30 p-2 text-xs capitalize text-white backdrop-blur-lg dark:bg-white/40 lg:px-3 lg:text-lg">
                     read more
                   </button>
