@@ -1,4 +1,5 @@
 import { HeroUIProvider } from "@heroui/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 import {
   isRouteErrorResponse,
   Links,
@@ -11,8 +12,6 @@ import {
 } from "react-router";
 import "react-toastify/dist/ReactToastify.css";
 import "./tailwind.css";
-
-import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 import ToTop from "./utils/scrolltotop";
 

@@ -23,8 +23,7 @@ export default function BlogView({ post }: BlogViewProps) {
       return null;
     }
   }
-  // TODO:
-  // ^ add fb comment plugin
+
   return (
     <div className="bn-google mt-10">
       <div className="my-2">
